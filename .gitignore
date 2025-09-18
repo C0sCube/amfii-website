@@ -6,3 +6,6 @@
 
 paths.json5
 run.bat
+
+.__pycache__
+__pycache__
