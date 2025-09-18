@@ -1,0 +1,8 @@
+
+.history/
+
+.venv/
+.venv
+
+paths.json5
+run.bat
