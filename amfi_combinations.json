@@ -1,0 +1,530 @@
+[
+  {
+    "maturityType": 1,
+    "category": 1,
+    "subCategory": 1,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 1,
+    "subCategory": 2,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 1,
+    "subCategory": 3,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 1,
+    "subCategory": 4,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 1,
+    "subCategory": 5,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 1,
+    "subCategory": 6,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 1,
+    "subCategory": 7,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 1,
+    "subCategory": 8,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 1,
+    "subCategory": 9,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 1,
+    "subCategory": 10,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 1,
+    "subCategory": 11,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 1,
+    "subCategory": 12,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 2,
+    "subCategory": 13,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 2,
+    "subCategory": 14,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 2,
+    "subCategory": 15,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 2,
+    "subCategory": 16,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 2,
+    "subCategory": 17,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 2,
+    "subCategory": 18,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 2,
+    "subCategory": 19,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 2,
+    "subCategory": 20,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 2,
+    "subCategory": 21,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 2,
+    "subCategory": 22,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 2,
+    "subCategory": 23,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 2,
+    "subCategory": 24,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 2,
+    "subCategory": 25,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 2,
+    "subCategory": 26,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 2,
+    "subCategory": 27,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 2,
+    "subCategory": 28,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 2,
+    "subCategory": 29,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 3,
+    "subCategory": 30,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 3,
+    "subCategory": 31,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 3,
+    "subCategory": 32,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 3,
+    "subCategory": 33,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 3,
+    "subCategory": 34,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 3,
+    "subCategory": 35,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 3,
+    "subCategory": 36,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 3,
+    "subCategory": 37,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 3,
+    "subCategory": 38,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 3,
+    "subCategory": 39,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 3,
+    "subCategory": 40,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 4,
+    "subCategory": 36,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 4,
+    "subCategory": 37,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 5,
+    "subCategory": 38,
+    "mfid": 0
+  },
+  {
+    "maturityType": 1,
+    "category": 5,
+    "subCategory": 39,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 1,
+    "subCategory": 1,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 1,
+    "subCategory": 2,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 1,
+    "subCategory": 3,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 1,
+    "subCategory": 4,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 1,
+    "subCategory": 5,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 1,
+    "subCategory": 6,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 1,
+    "subCategory": 7,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 1,
+    "subCategory": 8,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 1,
+    "subCategory": 9,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 1,
+    "subCategory": 10,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 1,
+    "subCategory": 11,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 1,
+    "subCategory": 12,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 2,
+    "subCategory": 13,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 2,
+    "subCategory": 14,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 2,
+    "subCategory": 15,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 2,
+    "subCategory": 16,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 2,
+    "subCategory": 17,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 2,
+    "subCategory": 18,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 2,
+    "subCategory": 19,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 2,
+    "subCategory": 20,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 2,
+    "subCategory": 21,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 2,
+    "subCategory": 22,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 2,
+    "subCategory": 23,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 2,
+    "subCategory": 24,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 2,
+    "subCategory": 25,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 2,
+    "subCategory": 26,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 2,
+    "subCategory": 27,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 2,
+    "subCategory": 28,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 2,
+    "subCategory": 29,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 3,
+    "subCategory": 30,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 3,
+    "subCategory": 31,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 3,
+    "subCategory": 32,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 3,
+    "subCategory": 33,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 3,
+    "subCategory": 34,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 3,
+    "subCategory": 35,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 3,
+    "subCategory": 36,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 3,
+    "subCategory": 37,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 3,
+    "subCategory": 38,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 3,
+    "subCategory": 39,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 3,
+    "subCategory": 40,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 4,
+    "subCategory": 36,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 4,
+    "subCategory": 37,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 5,
+    "subCategory": 38,
+    "mfid": 0
+  },
+  {
+    "maturityType": 2,
+    "category": 5,
+    "subCategory": 39,
+    "mfid": 0
+  }
+]
