@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>api_admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/api_home/style.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link rel="icon" type="image/x-icon" href="{% static 'img/NSE.ico' %}">
+
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <a class="sidebar-brand d-flex align-items-center" href="{% url 'home' %}">
+                <div class="sidebar-brand-text mx-3">NSE COGENCIS</div>
+            </a>
+            <hr class="sidebar-divider my-0">
+
+            <li class="nav-item active">
+                <a class="nav-link" href="#index.html">
+                    <span>Bulk Downloader</span></a>
+            </li>
+
+            <hr class="sidebar-divider">
+
+
+        </ul>
+
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <div class="input-group d-flex align-items-center">
+
+                        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#bulkForm">
+                            <span class="mr-2 ml-2">Create Task</span>
+                            <span class="material-symbols-outlined">create_new_folder</span>
+                        </button>
+                        
+                        {% include 'api_bulk/modal.html' %}
+
+                    </div>
+
+
+                
+
+                    <a href="{% url 'home' %}" class="btn btn-primary d-flex align-items-center" role="button">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                    </a>
+                <div class="topbar-divider d-none d-sm-block"></div>        
+                    <button class="btn btn-danger d-flex align-items-center" type="button" >
+                         <span class="mr-2">Kaustubh.Keny</span>
+                        <span class="material-symbols-outlined">logout</span>
+                    </button>
+                </nav>
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Assigned Tasks</h1>
+                    </div>
+
+                </div>
+            </div>
+            <!-- End of Main Content -->
+
+            <footer class="sticky-footer bg-white">
+            </footer>
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+
+
+    <script src="{% static 'js/api_home/script.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

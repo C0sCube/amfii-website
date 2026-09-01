@@ -1,0 +1,122 @@
+<div class="modal fade" id="bulkForm" tabindex="-1" aria-labelledby="bulkFormLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- Header -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="bulkFormLabel">
+                    Create Bulk Download Task
+                </h5>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+
+            <!-- Body -->
+            <div class="modal-body">
+
+                <div class="mb-4">
+                    <h6 class="text-primary fw-bold">Task Information</h6>
+                    <hr>
+                </div>
+
+                <div class="row mb-3 align-items-center">
+                    <div class="col-md-3">
+                        <label for="taskName" class="form-label fw-semibold">
+                            Task Name
+                        </label>
+                    </div>
+
+                    <div class="col-md-9">
+                        <input type="text"
+                               class="form-control"
+                               id="taskName"
+                               placeholder="nse_bulk_download">
+                    </div>
+                </div>
+
+                <div class="row mb-4 align-items-center">
+                    <div class="col-md-3">
+                        <label for="taskThrottle" class="form-label fw-semibold">
+                            Throttle (sec)
+                        </label>
+                    </div>
+
+                    <div class="col-md-9">
+                        <input type="number"
+                               class="form-control"
+                               id="taskThrottle"
+                               value="0"
+                               min="0">
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h6 class="text-primary fw-bold">Request Settings</h6>
+                    <hr>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <label for="taskHeaders" class="form-label fw-semibold">
+                            Headers
+                        </label>
+                    </div>
+
+                    <div class="col-md-9">
+                        <textarea class="form-control"
+                                  id="taskHeaders"
+                                  rows="6"
+                                  placeholder='{
+    "User-Agent": "Mozilla/5.0"
+}'></textarea>
+                        <small class="text-muted">
+                            Optional JSON request headers.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h6 class="text-primary fw-bold">Input Data</h6>
+                    <hr>
+                </div>
+
+                <div class="row align-items-center">
+                    <div class="col-md-3">
+                        <label for="taskFile" class="form-label fw-semibold">
+                            Files CSV
+                        </label>
+                    </div>
+
+                    <div class="col-md-9">
+                        <input class="form-control"
+                               type="file"
+                               id="taskFile"
+                               accept=".csv">
+
+                        <small class="text-muted">
+                            Upload a CSV containing download URLs.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer -->
+            <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                    Cancel
+                </button>
+
+                <button type="button"
+                        class="btn btn-primary">
+                    Create Task
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>

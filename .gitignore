@@ -5,7 +5,8 @@
 .venv
 
 paths.json5
+paths.json
 run.bat
 
 .__pycache__
-__pycache__
+__pycache__/
