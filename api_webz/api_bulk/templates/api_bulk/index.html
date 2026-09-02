@@ -57,12 +57,40 @@
           </nav>
 
           <!-- Begin Page Content -->
+
           <div class="container-fluid">
             <div
               class="d-sm-flex align-items-center justify-content-between mb-4"
             >
               <h1 class="h3 mb-0 text-gray-800">Assigned Tasks</h1>
             </div>
+
+                <!-- Task Cards -->
+                <div class="row">
+
+                {% if tasks %}
+                    {% for task in tasks %}
+                    {% include "api_bulk/task_card.html" with task=task %}
+                    {% endfor %}
+                {% else %}
+
+                    <div class="col-12">
+                    <div class="card shadow-sm">
+                        <div class="card-body text-center py-5">
+
+                        <span class="material-symbols-outlined text-gray-400" style="font-size: 48px">task</span>
+                        <h5 class="mt-3 text-gray-700">No tasks yet</h5>
+                        <p class="text-gray-500 mb-0">
+                            Create a task to get started.
+                        </p>
+
+                        </div>
+                    </div>
+                    </div>
+
+                {% endif %}
+
+                </div>
           </div>
         </div>
         <!-- End of Main Content -->

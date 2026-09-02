@@ -1,3 +1,7 @@
+{% load static %}
+
+<script src="{% static 'js/api_bulk/bulk.js' %}"></script>
+
 <div class="modal fade" id="bulkForm" tabindex="-1" aria-labelledby="bulkFormLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -32,6 +36,7 @@
                         <input type="text"
                                class="form-control"
                                id="taskName"
+                               name="task_name",
                                placeholder="nse_bulk_download">
                     </div>
                 </div>
@@ -46,7 +51,8 @@
                     <div class="col-md-9">
                         <input type="number"
                                class="form-control"
-                               id="taskThrottle"
+                               id="taskThrottle",
+                               name="throttle",
                                value="0"
                                min="0">
                     </div>
@@ -66,11 +72,11 @@
 
                     <div class="col-md-9">
                         <textarea class="form-control"
-                                  id="taskHeaders"
+                                  id="taskHeaders",
+                                  name="headers",
                                   rows="6"
-                                  placeholder='{
-    "User-Agent": "Mozilla/5.0"
-}'></textarea>
+                                  placeholder='{"User-Agent": "Mozilla/5.0"}'>
+                        </textarea>
                         <small class="text-muted">
                             Optional JSON request headers.
                         </small>
@@ -92,7 +98,8 @@
                     <div class="col-md-9">
                         <input class="form-control"
                                type="file"
-                               id="taskFile"
+                               id="taskFile",
+                               name="csv_file",
                                accept=".csv">
 
                         <small class="text-muted">
@@ -112,7 +119,7 @@
                 </button>
 
                 <button type="button"
-                        class="btn btn-primary">
+                        class="btn btn-primary" onclick="createBulkTask()">
                     Create Task
                 </button>
             </div>
