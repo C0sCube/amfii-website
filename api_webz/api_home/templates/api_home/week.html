@@ -1,358 +1,369 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-  {% include 'api_home/head.html' %}
+{% include 'api_home/head.html' %}
 
-  <body id="page-top">
-    <div id="wrapper">
-      <!-- Sidebar -->
-      <ul
-        class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
-        id="accordionSidebar"
-      >
-        {% include 'api_home/logo.html' %}
+<body id="page-top">
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+      {% include 'api_home/logo.html' %}
 
-        <hr class="sidebar-divider my-0" />
+      <hr class="sidebar-divider my-0" />
 
-        <li class="nav-item active">
-          <a class="nav-link" href="{% url 'week' %}">
-            <span>Week Schedule</span>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'week' %}">
+          <span>Week Schedule</span>
+        </a>
+      </li>
+
+      <hr class="sidebar-divider" />
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'home' %}">
+
+          <span>Task Manager</span>
+        </a>
+
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'bulk_home' %}">
+
+          <span>Bulk Download</span>
+        </a>
+
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'week' %}" data-toggle="collapse" data-target="#collapseTwo"
+          aria-expanded="true" aria-controls="collapseTwo">
+
+          <span>Week Schedule</span>
+        </a>
+        <!-- <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Custom Components:</h6>
+                        <a class="collapse-item" href="buttons.html">Buttons</a>
+                        <a class="collapse-item" href="cards.html">Cards</a>
+                    </div>
+                </div> -->
+      </li>
+    </ul>
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column vh-100">
+      <div id="content" class="d-flex flex-column flex-grow-1 overflow-hidden">
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+          <div class="input-group d-flex align-items-center"></div>
+
+          <a href="{% url 'home' %}" class="btn btn-primary d-flex align-items-center" role="button">
+            <span class="material-symbols-outlined"> arrow_back </span>
           </a>
-        </li>
 
-        <hr class="sidebar-divider" />
-      </ul>
+          <div class="topbar-divider d-none d-sm-block"></div>
 
-      <!-- Content Wrapper -->
-      <div id="content-wrapper" class="d-flex flex-column vh-100">
-        <div
-          id="content"
-          class="d-flex flex-column flex-grow-1 overflow-hidden"
-        >
-          <!-- Topbar -->
-          <nav
-            class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
-          >
-            <div class="input-group d-flex align-items-center"></div>
+          {% include 'logout.html' %}
+        </nav>
 
-            <a
-              href="{% url 'home' %}"
-              class="btn btn-primary d-flex align-items-center"
-              role="button"
-            >
-              <span class="material-symbols-outlined"> arrow_back </span>
-            </a>
+        <!-- Page Content -->
+        <div class="container-fluid flex-grow-1 d-flex flex-column overflow-hidden">
+          <!-- Schedule -->
+          <div class="table-responsive flex-grow-1 overflow-auto">
+            <table class="table table-bordered table-hover align-middle text-center mb-0"
+              style="table-layout: fixed; width: 100%">
+              <thead>
+                <tr>
+                  <th scope="col" style="width: 80px">TIME</th>
 
-            <div class="topbar-divider d-none d-sm-block"></div>
+                  <th scope="col">MON</th>
+                  <th scope="col">TUE</th>
+                  <th scope="col">WED</th>
+                  <th scope="col">THU</th>
+                  <th scope="col">FRI</th>
+                  <th scope="col">SAT</th>
+                  <th scope="col">SUN</th>
+                </tr>
+              </thead>
 
-            <button
-              class="btn btn-danger d-flex align-items-center"
-              type="button"
-            >
-              <span class="mr-2"> Kaustubh.Keny </span>
+              <tbody>
+                <tr>
+                  <th scope="row" class="table-light">0000</th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
 
-              <span class="material-symbols-outlined"> logout </span>
-            </button>
-          </nav>
+                <tr>
+                  <th scope="row" class="table-light">0100</th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
 
-          <!-- Page Content -->
-          <div
-            class="container-fluid flex-grow-1 d-flex flex-column overflow-hidden"
-          >
-            <!-- Schedule -->
-            <div class="table-responsive flex-grow-1 overflow-auto">
-              <table
-                class="table table-bordered table-hover align-middle text-center mb-0"
-                style="table-layout: fixed; width: 100%"
-              >
-                <thead>
-                  <tr>
-                    <th scope="col" style="width: 80px">TIME</th>
+                <tr>
+                  <th scope="row" class="table-light">0200</th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
 
-                    <th scope="col">MON</th>
-                    <th scope="col">TUE</th>
-                    <th scope="col">WED</th>
-                    <th scope="col">THU</th>
-                    <th scope="col">FRI</th>
-                    <th scope="col">SAT</th>
-                    <th scope="col">SUN</th>
-                  </tr>
-                </thead>
+                <tr>
+                  <th scope="row" class="table-light">0300</th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
 
-                <tbody>
-                  <tr>
-                    <th scope="row" class="table-light">0000</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                <tr>
+                  <th scope="row" class="table-light">0400</th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
 
-                  <tr>
-                    <th scope="row" class="table-light">0100</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                <tr>
+                  <th scope="row" class="table-light">0500</th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
 
-                  <tr>
-                    <th scope="row" class="table-light">0200</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                <tr>
+                  <th scope="row" class="table-light">0600</th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
 
-                  <tr>
-                    <th scope="row" class="table-light">0300</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                <tr>
+                  <th scope="row" class="table-light">0700</th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
 
-                  <tr>
-                    <th scope="row" class="table-light">0400</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                <tr>
+                  <th scope="row" class="table-light">0800</th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
 
-                  <tr>
-                    <th scope="row" class="table-light">0500</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                <tr>
+                  <th scope="row" class="table-light">0900</th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
 
-                  <tr>
-                    <th scope="row" class="table-light">0600</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                <tr>
+                  <th scope="row" class="table-light">1000</th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
 
-                  <tr>
-                    <th scope="row" class="table-light">0700</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                <tr>
+                  <th scope="row" class="table-light">1100</th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
 
-                  <tr>
-                    <th scope="row" class="table-light">0800</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                <tr>
+                  <th scope="row" class="table-light">1200</th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
 
-                  <tr>
-                    <th scope="row" class="table-light">0900</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                <tr>
+                  <th scope="row" class="table-light">1300</th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
 
-                  <tr>
-                    <th scope="row" class="table-light">1000</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                <tr>
+                  <th scope="row" class="table-light">1400</th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
 
-                  <tr>
-                    <th scope="row" class="table-light">1100</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                <tr>
+                  <th scope="row" class="table-light">1500</th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
 
-                  <tr>
-                    <th scope="row" class="table-light">1200</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                <tr>
+                  <th scope="row" class="table-light">1600</th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
 
-                  <tr>
-                    <th scope="row" class="table-light">1300</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                <tr>
+                  <th scope="row" class="table-light">1700</th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
 
-                  <tr>
-                    <th scope="row" class="table-light">1400</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                <tr>
+                  <th scope="row" class="table-light">1800</th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
 
-                  <tr>
-                    <th scope="row" class="table-light">1500</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                <tr>
+                  <th scope="row" class="table-light">1900</th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
 
-                  <tr>
-                    <th scope="row" class="table-light">1600</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                <tr>
+                  <th scope="row" class="table-light">2000</th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
 
-                  <tr>
-                    <th scope="row" class="table-light">1700</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                <tr>
+                  <th scope="row" class="table-light">2100</th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
 
-                  <tr>
-                    <th scope="row" class="table-light">1800</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                <tr>
+                  <th scope="row" class="table-light">2200</th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
 
-                  <tr>
-                    <th scope="row" class="table-light">1900</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row" class="table-light">2000</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row" class="table-light">2100</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row" class="table-light">2200</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row" class="table-light">2300</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                <tr>
+                  <th scope="row" class="table-light">2300</th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <script src="{% static 'js/api_home/script.js' %}"></script>
+  <script src="{% static 'js/api_home/script.js' %}"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
 </html>

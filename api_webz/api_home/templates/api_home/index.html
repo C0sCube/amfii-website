@@ -16,13 +16,13 @@
             </li>
 
             <hr class="sidebar-divider">
-            <div class="sidebar-heading">
+            <!-- <div class="sidebar-heading">
                 Interface
-            </div>
+            </div> -->
 
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'home' %}">
-                    
+
                     <span>Task Manager</span>
                 </a>
 
@@ -30,7 +30,7 @@
 
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'bulk_home' %}">
-                    
+
                     <span>Bulk Download</span>
                 </a>
 
@@ -40,7 +40,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{% url 'week' %}" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    
+
                     <span>Week Schedule</span>
                 </a>
                 <!-- <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -65,11 +65,12 @@
 
                     <div class="input-group d-flex align-items-center">
 
-                        <button class="btn btn-primary d-flex align-items-center" type="button" data-bs-toggle="modal" data-bs-target="#bulkForm">
+                        <button class="btn btn-primary d-flex align-items-center" type="button" data-bs-toggle="modal"
+                            data-bs-target="#bulkForm">
                             <span class="mr-2 ml-2">Create Container</span>
                             <span class="material-symbols-outlined">create_new_folder</span>
                         </button>
-                        
+
                         {% include 'api_bulk/modal.html' %}
 
                     </div>
@@ -79,18 +80,15 @@
                         <div class="input-group d-flex align-items-center">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
                                 aria-label="Search" aria-describedby="basic-addon2">
-                
+
                             <button class="btn btn-primary" type="button">
                                 <span class="material-symbols-outlined">search</span>
                             </button>
                         </div>
                     </form>
 
-                    <div class="topbar-divider d-none d-sm-block"></div>     
-                    <button class="btn btn-danger d-flex align-items-center" type="button" >
-                         <span class="mr-2">Kaustubh.Keny</span>
-                        <span class="material-symbols-outlined">logout</span>
-                    </button>
+                    <div class="topbar-divider d-none d-sm-block"></div>
+                    {% include 'logout.html' %}
                 </nav>
 
                 </nav>

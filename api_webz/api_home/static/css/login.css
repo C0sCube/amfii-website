@@ -1,0 +1,71 @@
+/* ===============================
+   LOGIN PAGE (INTENTIONALLY DISTINCT)
+   =============================== */
+.login-page {
+    min-height: 100vh;
+    background-color: #0f172a;
+    background-image:
+        radial-gradient(rgba(255, 255, 255, 0.15) 2px, transparent 0);
+    background-size: 30px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 420px;
+    padding: 20px;
+}
+
+.login-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 28px;
+}
+
+.login-header img {
+    height: 56px;
+}
+
+.login-header h1 {
+    color: #e5e7eb;
+    font-size: 22px;
+    margin: 0;
+    font-weight: 700;
+}
+
+.login-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    border-radius: 14px;
+    padding: 28px 24px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
+.login-card h2 {
+    text-align: center;
+    color: #fff;
+    margin-top: 0;
+    margin-bottom: 18px;
+}
+
+.login-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.login-btn {
+    margin-top: 6px;
+    background: #334155;
+}
+
+.login-error {
+    color: #fecaca;
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 10px;
+}

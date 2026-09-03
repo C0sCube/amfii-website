@@ -1,14 +1,36 @@
+function getCookie(name) {
+    let cookieValue = null;
+
+    if (document.cookie && document.cookie !== "") {
+        const cookies = document.cookie.split(";");
+
+        for (let cookie of cookies) {
+            cookie = cookie.trim();
+
+            if (cookie.startsWith(name + "=")) {
+                cookieValue = decodeURIComponent(
+                    cookie.substring(name.length + 1)
+                );
+                break;
+            }
+        }
+    }
+
+    return cookieValue;
+}
+
+
 async function createBulkTask() {
   try {
     const data = await getBulkFormJSON();
-
+    const csrfToken = getCookie("csrftoken");
     console.log("Sending task:", data);
 
-    const response = await fetch("{% url 'create_task' %}", {
+    const response = await fetch("/bulk/create/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-CSRFToken": "{{ csrf_token }}"
+        "X-CSRFToken": csrfToken
       },
       body: JSON.stringify(data)
     });

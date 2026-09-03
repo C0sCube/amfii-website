@@ -20,7 +20,11 @@ def index(request):
 
     tasks = DownloadTask.objects.all()
 
-    return render(request, "api_bulk/index.html", {"tasks": tasks})
+    return render(
+        request,
+        "api_bulk/index.html",
+        {"username": request.session.get("username"), "tasks": tasks},
+    )
 
 
 def create_task(request):

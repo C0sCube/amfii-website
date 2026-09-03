@@ -1,0 +1,7 @@
+<form method="POST" action="{% url 'logout' %}" class="d-inline">
+    {% csrf_token %} <!-- Required because it is a POST request -->
+    <button class="btn btn-danger d-flex align-items-center" type="submit">
+        <span class="mr-2">{{ username }}</span>
+        <span class="material-symbols-outlined">logout</span>
+    </button>
+</form>

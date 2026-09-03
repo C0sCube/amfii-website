@@ -1,107 +1,126 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-  {% include 'api_home/head.html' %}
-  <body id="page-top">
-    <div id="wrapper">
-      <ul
-        class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
-        id="accordionSidebar"
-      >
-        {% include 'api_home/logo.html' %}
-        <hr class="sidebar-divider my-0" />
+{% include 'api_home/head.html' %}
 
-        <li class="nav-item active">
-          <a class="nav-link" href="#index.html">
-            <span>Bulk Downloader</span></a
-          >
-        </li>
+<body id="page-top">
+  <div id="wrapper">
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+      {% include 'api_home/logo.html' %}
+      <hr class="sidebar-divider my-0" />
 
-        <hr class="sidebar-divider" />
-      </ul>
+      <li class="nav-item active">
+        <a class="nav-link" href="#index.html">
+          <span>Bulk Download</span></a>
+      </li>
 
-      <div id="content-wrapper" class="d-flex flex-column">
-        <div id="content">
-          <nav
-            class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
-          >
-            <div class="input-group d-flex align-items-center">
-              <button
-                class="btn btn-primary d-flex align-items-center"
-                type="button"
-                data-bs-toggle="modal"
-                data-bs-target="#bulkForm"
-              >
-                <span class="mr-2 ml-2">Create Task</span>
-                <span class="material-symbols-outlined">create_new_folder</span>
-              </button>
+      <hr class="sidebar-divider" />
 
-              {% include 'api_bulk/modal.html' %}
-            </div>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'home' %}">
 
-            <a
-              href="{% url 'home' %}"
-              class="btn btn-primary d-flex align-items-center"
-              role="button"
-            >
-              <span class="material-symbols-outlined">arrow_back</span>
-            </a>
-            <div class="topbar-divider d-none d-sm-block"></div>
-            <button
-              class="btn btn-danger d-flex align-items-center"
-              type="button"
-            >
-              <span class="mr-2">Kaustubh.Keny</span>
-              <span class="material-symbols-outlined">logout</span>
+          <span>Task Manager</span>
+        </a>
+
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'bulk_home' %}">
+
+          <span>Bulk Download</span>
+        </a>
+
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'week' %}" data-toggle="collapse" data-target="#collapseTwo"
+          aria-expanded="true" aria-controls="collapseTwo">
+
+          <span>Week Schedule</span>
+        </a>
+        <!-- <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Custom Components:</h6>
+                        <a class="collapse-item" href="buttons.html">Buttons</a>
+                        <a class="collapse-item" href="cards.html">Cards</a>
+                    </div>
+                </div> -->
+      </li>
+
+
+    </ul>
+
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+          <div class="input-group d-flex align-items-center">
+            <button class="btn btn-primary d-flex align-items-center" type="button" data-bs-toggle="modal"
+              data-bs-target="#bulkForm">
+              <span class="mr-2 ml-2">Create Container</span>
+              <span class="material-symbols-outlined">create_new_folder</span>
             </button>
-          </nav>
 
-          <!-- Begin Page Content -->
+            {% include 'api_bulk/modal.html' %}
+          </div>
 
-          <div class="container-fluid">
-            <div
-              class="d-sm-flex align-items-center justify-content-between mb-4"
-            >
-              <h1 class="h3 mb-0 text-gray-800">Assigned Tasks</h1>
-            </div>
+          <a href="{% url 'home' %}" class="btn btn-primary d-flex align-items-center" role="button">
+            <span class="material-symbols-outlined">arrow_back</span>
+          </a>
+          <div class="topbar-divider d-none d-sm-block"></div>
+          {% include 'logout.html' %}
+        </nav>
 
-                <!-- Task Cards -->
-                <div class="row">
+        <!-- Begin Page Content -->
 
-                {% if tasks %}
-                    {% for task in tasks %}
-                    {% include "api_bulk/task_card.html" with task=task %}
-                    {% endfor %}
-                {% else %}
+        <div class="container-fluid">
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Assigned Tasks</h1>
+          </div>
 
-                    <div class="col-12">
-                    <div class="card shadow-sm">
-                        <div class="card-body text-center py-5">
+          <!-- Task Cards -->
+          <div class="row">
 
-                        <span class="material-symbols-outlined text-gray-400" style="font-size: 48px">task</span>
-                        <h5 class="mt-3 text-gray-700">No tasks yet</h5>
-                        <p class="text-gray-500 mb-0">
-                            Create a task to get started.
-                        </p>
+            {% if tasks %}
+            {% for task in tasks %}
+            {% include "api_bulk/task_card.html" with task=task %}
+            {% endfor %}
+            {% else %}
 
-                        </div>
-                    </div>
-                    </div>
+            <div class="col-12">
+              <div class="card shadow-sm">
+                <div class="card-body text-center py-5">
 
-                {% endif %}
+                  <span class="material-symbols-outlined text-gray-400" style="font-size: 48px">task</span>
+                  <h5 class="mt-3 text-gray-700">No tasks yet</h5>
+                  <p class="text-gray-500 mb-0">
+                    Create a task to get started.
+                  </p>
 
                 </div>
+              </div>
+            </div>
+
+            {% endif %}
+
+            <div id="expandedTask" class="container d-none, p-3 my-3 border rounded">
+              <p>This container is hidden until you trigger the unhide action.</p>
+            </div>
+
+
           </div>
         </div>
-        <!-- End of Main Content -->
-
-        <footer class="sticky-footer bg-white"></footer>
       </div>
-      <!-- End of Content Wrapper -->
-    </div>
-    <!-- End of Page Wrapper -->
+      <!-- End of Main Content -->
 
-    <script src="{% static 'js/api_home/script.js' %}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+      <footer class="sticky-footer bg-white"></footer>
+    </div>
+    <!-- End of Content Wrapper -->
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <script src="{% static 'js/api_home/script.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
 </html>

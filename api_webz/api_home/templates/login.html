@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login | Factsheet Parser</title>
+
+  <link rel="icon" type="image/x-icon" href="{% static 'img/NSE.ico' %}" />
+  <link rel="stylesheet" href="{% static 'css/api_home/style.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+</head>
+
+<body class="login-page">
+
+  <div class="login-container">
+
+    <div class="login-card">
+    <div class="login-header">
+      <img src="{% static 'img/logo_nse.png' %}" alt="Logo">
+      <h1 class="m-2 ml-1">TASKLIST ADMINAPP</h1>
+    </div>
+
+      {% if error %}
+        <div class="login-error">
+          {{ error }}
+        </div>
+      {% endif %}
+
+      <form method="POST" action="{% url 'login' %}" autocomplete="">
+
+
+        {% csrf_token %}
+        <input type="text"
+               name="username"
+               class="input"
+               placeholder="Username"
+               required
+               autofocus>
+
+        <input type="password"
+               name="password"
+               class="input"
+               placeholder="Password"
+               required>
+
+
+        <button class="btn login-btn" type="submit">
+            <span class="m-2 ml-2">Login</span>
+            
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
