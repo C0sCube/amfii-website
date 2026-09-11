@@ -26,13 +26,13 @@
       <!-- Info -->
       <div class="row mt-3 small text-gray-600">
         <div class="col-6">
-            <strong>Owner</strong><br />
+          <strong>Owner</strong><br />
 
-            {% for owner in task.owner %}
-                {{ owner }}{% if not forloop.last %}, {% endif %}
-            {% empty %}
-                -
-            {% endfor %}
+          {% for owner in task.owner %}
+          {{ owner }}{% if not forloop.last %}, {% endif %}
+          {% empty %}
+          -
+          {% endfor %}
         </div>
 
         <div class="col-3">
@@ -48,20 +48,12 @@
 
       <!-- Actions -->
       <div class="d-flex justify-content-end mt-3 pt-2 border-top">
-        <button
-          type="button"
-          class="btn btn-sm btn-primary me-2"
-          data-bs-toggle="modal"
-          data-bs-target="#taskDetailModal-{{ task.id }}"
-        >
+        <button type="button" class="btn btn-sm btn-primary me-2" data-bs-toggle="modal"
+          data-bs-target="#taskDetailModal-{{ task.id }}">
           View Task
         </button>
 
-        <button
-          type="button"
-          class="btn btn-sm btn-danger"
-          data-task-id="{{ task.id }}"
-        >
+        <button type="button" class="btn btn-sm btn-danger" data-task-id="{{ task.id }}">
           Delete
         </button>
       </div>

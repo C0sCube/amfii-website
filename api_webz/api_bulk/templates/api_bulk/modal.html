@@ -11,10 +11,7 @@
                 <h5 class="modal-title" id="bulkFormLabel">
                     Create Bulk Download Task
                 </h5>
-                <button type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <!-- Body -->
@@ -33,11 +30,8 @@
                     </div>
 
                     <div class="col-md-9">
-                        <input type="text"
-                               class="form-control"
-                               id="taskName"
-                               name="task_name",
-                               placeholder="nse_bulk_download">
+                        <input type="text" class="form-control" id="taskName" name="task_name" ,
+                            placeholder="nse_bulk_download">
                     </div>
                 </div>
 
@@ -49,12 +43,8 @@
                     </div>
 
                     <div class="col-md-9">
-                        <input type="number"
-                               class="form-control"
-                               id="taskThrottle",
-                               name="throttle",
-                               value="0"
-                               min="0">
+                        <input type="number" class="form-control" id="taskThrottle" , name="throttle" , value="0"
+                            min="0">
                     </div>
                 </div>
 
@@ -71,11 +61,8 @@
                     </div>
 
                     <div class="col-md-9">
-                        <textarea class="form-control"
-                                  id="taskHeaders",
-                                  name="headers",
-                                  rows="6"
-                                  placeholder='{"User-Agent": "Mozilla/5.0"}'>
+                        <textarea class="form-control" id="taskHeaders" , name="headers" , rows="6"
+                            placeholder='{"User-Agent": "Mozilla/5.0"}'>
                         </textarea>
                         <small class="text-muted">
                             Optional JSON request headers.
@@ -96,11 +83,7 @@
                     </div>
 
                     <div class="col-md-9">
-                        <input class="form-control"
-                               type="file"
-                               id="taskFile",
-                               name="csv_file",
-                               accept=".csv">
+                        <input class="form-control" type="file" id="taskFile" , name="csv_file" , accept=".csv">
 
                         <small class="text-muted">
                             Upload a CSV containing download URLs.
@@ -112,14 +95,11 @@
 
             <!-- Footer -->
             <div class="modal-footer">
-                <button type="button"
-                        class="btn btn-secondary"
-                        data-bs-dismiss="modal">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                     Cancel
                 </button>
 
-                <button type="button"
-                        class="btn btn-primary" onclick="createBulkTask()">
+                <button type="button" class="btn btn-primary" onclick="createBulkTask()">
                     Create Task
                 </button>
             </div>

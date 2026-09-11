@@ -1,158 +1,79 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
+{% block sidebar %}
 
-{% include 'api_home/head.html' %}
+<li class="nav-item active">
+    <a class="nav-link" href="#index.html">
+        <span>Dashboard</span></a>
+</li>
 
-<body id="page-top">
-    <div id="wrapper">
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-            {% include 'api_home/logo.html' %}
-            <hr class="sidebar-divider my-0">
+{% endblock %}
 
-            <li class="nav-item active">
-                <a class="nav-link" href="#index.html">
-                    <span>Dashboard</span></a>
-            </li>
+{% block navbar %}
+<div class="input-group d-flex align-items-center">
 
-            <hr class="sidebar-divider">
-            <!-- <div class="sidebar-heading">
-                Interface
-            </div> -->
+    <button class="btn btn-primary d-flex align-items-center" type="button" data-bs-toggle="modal"
+        data-bs-target="#bulkForm">
+        <span class="mr-2 ml-2">Create Container</span>
+        <span class="material-symbols-outlined">create_new_folder</span>
+    </button>
 
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'home' %}">
+    {% include 'api_bulk/modal.html' %}
+</div>
 
-                    <span>Task Manager</span>
-                </a>
+<form class="navbar-search">
+    <div class="input-group d-flex align-items-center">
+        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search"
+            aria-describedby="basic-addon2">
 
-            </li>
+        <button class="btn btn-primary" type="button">
+            <span class="material-symbols-outlined">search</span>
+        </button>
+    </div>
+</form>
 
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'bulk_home' %}">
-
-                    <span>Bulk Download</span>
-                </a>
-
-            </li>
+{% endblock %}
 
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{% url 'week' %}" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
+{% block container %}
 
-                    <span>Week Schedule</span>
-                </a>
-                <!-- <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
-                    </div>
-                </div> -->
-            </li>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Assigned Tasks</h1>
+    </div>
 
-            <hr class="sidebar-divider">
-
-
-
-        </ul>
-
-        <div id="content-wrapper" class="d-flex flex-column">
-            <div id="content">
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-
-                    <div class="input-group d-flex align-items-center">
-
-                        <button class="btn btn-primary d-flex align-items-center" type="button" data-bs-toggle="modal"
-                            data-bs-target="#bulkForm">
-                            <span class="mr-2 ml-2">Create Container</span>
-                            <span class="material-symbols-outlined">create_new_folder</span>
-                        </button>
-
-                        {% include 'api_bulk/modal.html' %}
-
-                    </div>
-
-
-                    <form class="navbar-search">
-                        <div class="input-group d-flex align-items-center">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-
-                            <button class="btn btn-primary" type="button">
-                                <span class="material-symbols-outlined">search</span>
-                            </button>
-                        </div>
-                    </form>
-
-                    <div class="topbar-divider d-none d-sm-block"></div>
-                    {% include 'logout.html' %}
-                </nav>
-
-                </nav>
-
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Assigned Tasks</h1>
-                    </div>
-
-                    <!-- Content Row -->
-                    <div class="row">
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                TASK#1</div>
-                                            <div class="h6 mb-0 text-gray-500">NSE-INSIDER-TRADE</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+    <!-- Content Row -->
+    <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                TASK#1</div>
+                            <div class="h6 mb-0 text-gray-500">NSE-INSIDER-TRADE</div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- End of Main Content -->
-
-            <footer class="sticky-footer bg-white">
-            </footer>
-
         </div>
-        <!-- End of Content Wrapper -->
 
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- End of Page Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+{% endblock %}
 
 
+{% block scripts %}
+<script src="{% static 'js/api_home/script.js' %}"></script>
+{% endblock %}
 
-
-    <script src="{% static 'js/api_home/script.js' %}"></script>
-
-
-
-</body>
-
-</html>

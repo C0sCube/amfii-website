@@ -1,0 +1,296 @@
+"https://services.gst.gov.in/services/api/search/taxpayerDetails"
+# {"gstin":"29AAACA3622K1ZR","captcha":"580515"}
+
+{
+    "ntcrbs": "MFT",
+    "adhrVFlag": "No",
+    "lgnm": "ASIAN PAINTS LIMITED",
+    "stj": "State - Karnataka,Division - Large Taxpayers Unit -LTU, Bengaluru, LOCAL GST Office - LGSTO LTU, Bengaluru",
+    "dty": "Regular",
+    "cxdt": "",
+    "gstin": "29AAACA3622K1ZR",
+    "nba": [
+        "Service Provision",
+        "Recipient of Goods or Services",
+        "Warehouse / Depot",
+        "Office / Sale Office",
+        "Supplier of Services",
+        "Factory / Manufacturing",
+        "Retail Business",
+        "Import",
+        "Bonded Warehouse"
+    ],
+    "ekycVFlag": "No",
+    "cmpRt": "NA",
+    "rgdt": "01/07/2017",
+    "ctb": "Public Limited Company",
+    "pradr": {
+        "adr": "1st FLOOR, 32-B, ASIAN PAINTS LIMITED, 2ND PHASE, PEENYA INDUSTRIAL AREA, Peenya, Bengaluru, Bengaluru Urban, Karnataka, 560058"
+    },
+    "sts": "Active",
+    "tradeNam": "ASIAN PAINTS LIMITED",
+    "isFieldVisitConducted": "No",
+    "ctj": "State - CBIC,Zone - BENGALURU,Commissionerate - BENGALURU-NORTH WEST,Division - NORTH WEST DIVISION-1,Range - RANGE-ANWD1 (Jurisdictional Office)",
+    "einvoiceStatus": "Yes"
+}
+
+# HTTP/1.1 200 OK
+# date: Thu, 10 Sep 2026 06:14:31 GMT
+# content-type: application/json;charset=ISO-8859-1
+# content-length: 911
+# set-cookie: CaptchaCookie=""; Domain=.gst.gov.in; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/; Secure; HttpOnly
+# expires: Thu, 10 Sep 2026 06:14:30 GMT
+# cache-control: no-cache
+# content-security-policy: default-src 'self' *.gst.gov.in; script-src 'self' 'unsafe-inline' 'unsafe-eval' seal.entrust.net *.gst.gov.in; img-src 'self' seal.entrust.net *.gst.gov.in data: blob: filesystem:; style-src 'self' 'unsafe-inline' *.gst.gov.in; font-src 'self' *.gst.gov.in; child-src 'self' *.gst.gov.in; object-src 'self' *.gst.gov.in; media-src 'self' blob: mediastream; connect-src 'self' *.gst.gov.in wss://127.0.0.1:8080 wss://127.0.0.1:1645 wss://127.0.0.1:1812 wss://127.0.0.1:2083 wss://127.0.0.1:2948 wss://127.0.0.1:1585 wss://127.0.0.1:2095 wss://127.0.0.1:2568 wss://127.0.0.1:4587 wss://127.0.0.1:2868
+# access-control-allow-origin: *
+# access-control-allow-methods: GET, POST
+# access-control-allow-headers: DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Origin,Content-Type,Accept,Pragma,Expires
+# access-control-allow-credentials: true
+# x-frame-options: SAMEORIGIN
+# x-content-type-options: nosniff
+# x-xss-protection: 1; mode=block
+# strict-transport-security: max-age=31536000; includeSubDomains
+# cache-control: private,no-cache
+# cache-control: no-cache, no-store, max-age=0, must-revalidate
+# pragma: no-cache
+# Set-Cookie: TS0134d082=010c0f54ddf2fbecb8630cdcc831a0e773fc133bdb56a11b5eb6fe946ce32662f787040a27c5db99512c8e46ed1714d868c8aa50f9; Path=/; Domain=.services.gst.gov.in; HttpOnly; Secure
+# Set-Cookie: TSf2521acf027=08b31d24a4ab20003584d39caee0eba627e09ab70a5d336049adaf0d601e29c6fe2b78957b1b556e0873c438f6113000b8d3590b3d237191dc58fe82f60b75791df213bc0d3b02e4734a6b3b07becf4835b5c7a2e75761a2fadfbce594797f63; Path=/; Secure
+
+
+# POST /services/api/search/taxpayerDetails HTTP/1.1
+# Accept: application/json, text/plain, */*
+# Accept-Encoding: gzip, deflate, br, zstd
+# Accept-Language: en-US,en;q=0.9
+# Connection: keep-alive
+# Content-Length: 46
+# Content-Type: application/json;charset=UTF-8
+# Cookie: Lang=en; ak_bmsc=5CA3E899F62D6A739D699FE4692B2446~000000000000000000000000000000~YAAQtPXSF4WGJH+gAQAAyjnyiQG2QkbHKj4bESOfy4nYotsfM3XXwsqi4II9BKRkBabh/uEpmYIf5it2xkvCZx30Flx168vXQ15gyCi5ub3G7rrCwTd2riJZ309nenxnw7tYI6gAIJ3S0wr7pkZcxQp75U9+w3G4jRZ2SOPdddjqxpC9cW7QGrwovvuZFPkMbcuFJz174aqkGO/fInquFt0P1H28Dn7DTQF5wV8bM12ZBBqyivH+ubO+KcSQ9MoxtfsONZrXWFW2F0AT/gy202APi+6CRulOBmS0CacRYWvkB7zkOSpPG1UgulKeZAnH1R9EynWtYRmY+J8hWZ3MGgKwcUWmpCtU4s/bbQU8li0I9rqxsuptdMa6hwJm6kQpdWs=; CaptchaCookie=24748f2c8d464a578e7a4072d3748683; TS0134d082=010c0f54ddf2fbecb8630cdcc831a0e773fc133bdb56a11b5eb6fe946ce32662f787040a27c5db99512c8e46ed1714d868c8aa50f9; TSf2521acf027=08b31d24a4ab200026e5ae77a9b34dad2be68a53c0566f3d07df03d683bae8a2b78483a4b689148b08735f7fdf11300075052b2e3e0f93304e612f8149b3ee36f372c90e138ffaa97a150fb99ad50aaf406de07905f49608b05d65b045b5a02c
+# DNT: 1
+# Host: services.gst.gov.in
+# Origin: https://services.gst.gov.in
+# Referer: https://services.gst.gov.in/services/searchtp
+# Sec-Fetch-Dest: empty
+# Sec-Fetch-Mode: cors
+# Sec-Fetch-Site: same-origin
+# User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36
+# sec-ch-ua: "Chromium";v="152", "Not?A_Brand";v="24", "Google Chrome";v="152"
+# sec-ch-ua-mobile: ?0
+# sec-ch-ua-platform: "Windows"
+
+
+==============================================================================================
+
+"https://services.gst.gov.in/services/api/search/getAddlTrdNams?gstin=29AAACA3622K1ZR"
+# gstin=29AAACA3622K1ZR
+# HTTP/1.1 200 OK
+# date: Thu, 10 Sep 2026 06:17:52 GMT
+# content-type: application/json;charset=ISO-8859-1
+# content-length: 4
+# expires: Thu, 10 Sep 2026 06:17:51 GMT
+# cache-control: no-cache
+# content-security-policy: default-src 'self' *.gst.gov.in; script-src 'self' 'unsafe-inline' 'unsafe-eval' seal.entrust.net *.gst.gov.in; img-src 'self' seal.entrust.net *.gst.gov.in data: blob: filesystem:; style-src 'self' 'unsafe-inline' *.gst.gov.in; font-src 'self' *.gst.gov.in; child-src 'self' *.gst.gov.in; object-src 'self' *.gst.gov.in; media-src 'self' blob: mediastream; connect-src 'self' *.gst.gov.in wss://127.0.0.1:8080 wss://127.0.0.1:1645 wss://127.0.0.1:1812 wss://127.0.0.1:2083 wss://127.0.0.1:2948 wss://127.0.0.1:1585 wss://127.0.0.1:2095 wss://127.0.0.1:2568 wss://127.0.0.1:4587 wss://127.0.0.1:2868
+# access-control-allow-origin: *
+# access-control-allow-methods: GET, POST
+# access-control-allow-headers: DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Origin,Content-Type,Accept,Pragma,Expires
+# access-control-allow-credentials: true
+# x-frame-options: SAMEORIGIN
+# x-content-type-options: nosniff
+# x-xss-protection: 1; mode=block
+# strict-transport-security: max-age=31536000; includeSubDomains
+# cache-control: private,no-cache
+# cache-control: no-cache, no-store, max-age=0, must-revalidate
+# pragma: no-cache
+# Set-Cookie: TSf2521acf027=08b31d24a4ab20006d13a75d873e610a12d5922c082a733f4c48da3426b098bfc9f714cdf5190f90082a02d320113000df31a66d0f7b2b58915d307a8ce6ae5e1a6f416b2cf1736478638ec0f40ae7c0078d0f89f4de788d12683ebf14b5bec4; Path=/; Secure
+
+
+# GET /services/api/search/getAddlTrdNams?gstin=29AAACA3622K1ZR HTTP/1.1
+# Accept: application/json, text/plain, */*
+# Accept-Encoding: gzip, deflate, br, zstd
+# Accept-Language: en-US,en;q=0.9
+# Connection: keep-alive
+# Cookie: Lang=en; ak_bmsc=5CA3E899F62D6A739D699FE4692B2446~000000000000000000000000000000~YAAQtPXSF4WGJH+gAQAAyjnyiQG2QkbHKj4bESOfy4nYotsfM3XXwsqi4II9BKRkBabh/uEpmYIf5it2xkvCZx30Flx168vXQ15gyCi5ub3G7rrCwTd2riJZ309nenxnw7tYI6gAIJ3S0wr7pkZcxQp75U9+w3G4jRZ2SOPdddjqxpC9cW7QGrwovvuZFPkMbcuFJz174aqkGO/fInquFt0P1H28Dn7DTQF5wV8bM12ZBBqyivH+ubO+KcSQ9MoxtfsONZrXWFW2F0AT/gy202APi+6CRulOBmS0CacRYWvkB7zkOSpPG1UgulKeZAnH1R9EynWtYRmY+J8hWZ3MGgKwcUWmpCtU4s/bbQU8li0I9rqxsuptdMa6hwJm6kQpdWs=; TS0134d082=010c0f54ddf2fbecb8630cdcc831a0e773fc133bdb56a11b5eb6fe946ce32662f787040a27c5db99512c8e46ed1714d868c8aa50f9; TSf2521acf027=08b31d24a4ab2000458fbcc82b2404bb2c6c936daf3bab11e37feb8870a9c32c2b03e61f991f47350878c62b1f1130009335b66be804ad6edc58fe82f60b75791df213bc0d3b02e4734a6b3b07becf4835b5c7a2e75761a2fadfbce594797f63
+# DNT: 1
+# Host: services.gst.gov.in
+# Referer: https://services.gst.gov.in/services/searchtp
+# Sec-Fetch-Dest: empty
+# Sec-Fetch-Mode: cors
+# Sec-Fetch-Site: same-origin
+# User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36
+# sec-ch-ua: "Chromium";v="152", "Not?A_Brand";v="24", "Google Chrome";v="152"
+# sec-ch-ua-mobile: ?0
+# sec-ch-ua-platform: "Windows"
+
+
+==============================================================================================
+
+"https://services.gst.gov.in/services/api/search/goodservice?gstin=29AAACA3622K1ZR"
+# gstin=29AAACA3622K1ZR
+
+{
+    "bzgddtls": [
+        {
+            "gdes": "ACRYLIC EMULSION",
+            "hsncd": "32091010"
+        },
+        {
+            "gdes": "OTHER",
+            "hsncd": "32091090"
+        },
+        {
+            "gdes": "SYNTHETIC ENAMEL, OTHER COLOURS",
+            "hsncd": "32089022"
+        },
+        {
+            "gdes": "OTHER",
+            "hsncd": "32089090"
+        },
+        {
+            "gdes": "SYNTHETIC ENAMEL, ULTRA WHITE PAINTS",
+            "hsncd": "32089021"
+        }
+    ],
+    "bzsdtls": [
+        {
+            "saccd": "00440366",
+            "sdes": "BUSINESS SUPPORT SERVICES"
+        },
+        {
+            "saccd": "00440278",
+            "sdes": "INTELLECTUAL PROPERTY SERVICES OTHER THAN COPYRIGHT"
+        },
+        {
+            "saccd": "00440076",
+            "sdes": "INTERIOR DECORATORS/ DESIGNERS SERVICE"
+        },
+        {
+            "saccd": "00440060",
+            "sdes": "MANPOWER RECRUITMENT AGENCY"
+        },
+        {
+            "saccd": "00440406",
+            "sdes": "RENTING OF IMMOVABLE PROPERTY SERVICES"
+        }
+    ]
+}
+
+
+# 3 / 4 requests
+# 6.6 kB / 13.4 kB transferred
+# Request URL
+# https://services.gst.gov.in/services/api/search/goodservice?gstin=29AAACA3622K1ZR
+# Request Method
+# GET
+# Status Code
+# 200 OK
+# Remote Address
+# 116.50.59.139:80
+# Referrer Policy
+# strict-origin-when-cross-origin
+# HTTP/1.1 200 OK
+# date: Thu, 10 Sep 2026 06:14:31 GMT
+# content-type: application/json;charset=ISO-8859-1
+# content-length: 608
+# expires: Thu, 10 Sep 2026 06:14:30 GMT
+# cache-control: no-cache
+# content-security-policy: default-src 'self' *.gst.gov.in; script-src 'self' 'unsafe-inline' 'unsafe-eval' seal.entrust.net *.gst.gov.in; img-src 'self' seal.entrust.net *.gst.gov.in data: blob: filesystem:; style-src 'self' 'unsafe-inline' *.gst.gov.in; font-src 'self' *.gst.gov.in; child-src 'self' *.gst.gov.in; object-src 'self' *.gst.gov.in; media-src 'self' blob: mediastream; connect-src 'self' *.gst.gov.in wss://127.0.0.1:8080 wss://127.0.0.1:1645 wss://127.0.0.1:1812 wss://127.0.0.1:2083 wss://127.0.0.1:2948 wss://127.0.0.1:1585 wss://127.0.0.1:2095 wss://127.0.0.1:2568 wss://127.0.0.1:4587 wss://127.0.0.1:2868
+# access-control-allow-origin: *
+# access-control-allow-methods: GET, POST
+# access-control-allow-headers: DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Origin,Content-Type,Accept,Pragma,Expires
+# access-control-allow-credentials: true
+# x-frame-options: SAMEORIGIN
+# x-content-type-options: nosniff
+# x-xss-protection: 1; mode=block
+# strict-transport-security: max-age=31536000; includeSubDomains
+# cache-control: private,no-cache
+# cache-control: no-cache, no-store, max-age=0, must-revalidate
+# pragma: no-cache
+# Set-Cookie: TSf2521acf027=08b31d24a4ab2000458fbcc82b2404bb2c6c936daf3bab11e37feb8870a9c32c2b03e61f991f47350878c62b1f1130009335b66be804ad6edc58fe82f60b75791df213bc0d3b02e4734a6b3b07becf4835b5c7a2e75761a2fadfbce594797f63; Path=/; Secure
+
+# GET /services/api/search/goodservice?gstin=29AAACA3622K1ZR HTTP/1.1
+# Accept: application/json, text/plain, */*
+# Accept-Encoding: gzip, deflate, br, zstd
+# Accept-Language: en-US,en;q=0.9
+# Connection: keep-alive
+# Cookie: Lang=en; ak_bmsc=5CA3E899F62D6A739D699FE4692B2446~000000000000000000000000000000~YAAQtPXSF4WGJH+gAQAAyjnyiQG2QkbHKj4bESOfy4nYotsfM3XXwsqi4II9BKRkBabh/uEpmYIf5it2xkvCZx30Flx168vXQ15gyCi5ub3G7rrCwTd2riJZ309nenxnw7tYI6gAIJ3S0wr7pkZcxQp75U9+w3G4jRZ2SOPdddjqxpC9cW7QGrwovvuZFPkMbcuFJz174aqkGO/fInquFt0P1H28Dn7DTQF5wV8bM12ZBBqyivH+ubO+KcSQ9MoxtfsONZrXWFW2F0AT/gy202APi+6CRulOBmS0CacRYWvkB7zkOSpPG1UgulKeZAnH1R9EynWtYRmY+J8hWZ3MGgKwcUWmpCtU4s/bbQU8li0I9rqxsuptdMa6hwJm6kQpdWs=; TS0134d082=010c0f54ddf2fbecb8630cdcc831a0e773fc133bdb56a11b5eb6fe946ce32662f787040a27c5db99512c8e46ed1714d868c8aa50f9; TSf2521acf027=08b31d24a4ab20003584d39caee0eba627e09ab70a5d336049adaf0d601e29c6fe2b78957b1b556e0873c438f6113000b8d3590b3d237191dc58fe82f60b75791df213bc0d3b02e4734a6b3b07becf4835b5c7a2e75761a2fadfbce594797f63
+# DNT: 1
+# Host: services.gst.gov.in
+# Referer: https://services.gst.gov.in/services/searchtp
+# Sec-Fetch-Dest: empty
+# Sec-Fetch-Mode: cors
+# Sec-Fetch-Site: same-origin
+# User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36
+# sec-ch-ua: "Chromium";v="152", "Not?A_Brand";v="24", "Google Chrome";v="152"
+# sec-ch-ua-mobile: ?0
+# sec-ch-ua-platform: "Windows"
+
+
+==============================================================================================
+
+"https://services.gst.gov.in/services/api/dropdownfinyear?gstin=29AAACA3622K1ZR"
+# gstin=29AAACA3622K1ZR
+{
+    "status": 1,
+    "data": [
+        {
+            "year": "2017-2018",
+            "value": "2017"
+        },
+        {
+            "year": "2018-2019",
+            "value": "2018"
+        },
+        {
+            "year": "2019-2020",
+            "value": "2019"
+        },
+        {
+            "year": "2020-2021",
+            "value": "2020"
+        },
+        {
+            "year": "2021-2022",
+            "value": "2021"
+        },
+        {
+            "year": "2022-2023",
+            "value": "2022"
+        },
+        {
+            "year": "2023-2024",
+            "value": "2023"
+        },
+        {
+            "year": "2024-2025",
+            "value": "2024"
+        },
+        {
+            "year": "2025-2026",
+            "value": "2025"
+        },
+        {
+            "year": "2026-2027",
+            "value": "2026"
+        }
+    ]
+}
+
+# HTTP/1.1 200 OK
+# date: Thu, 10 Sep 2026 06:22:47 GMT
+# content-type: application/json;charset=ISO-8859-1
+# content-length: 381
+# expires: Thu, 10 Sep 2026 06:22:46 GMT
+# cache-control: no-cache
+# content-security-policy: default-src 'self' *.gst.gov.in; script-src 'self' 'unsafe-inline' 'unsafe-eval' seal.entrust.net *.gst.gov.in; img-src 'self' seal.entrust.net *.gst.gov.in data: blob: filesystem:; style-src 'self' 'unsafe-inline' *.gst.gov.in; font-src 'self' *.gst.gov.in; child-src 'self' *.gst.gov.in; object-src 'self' *.gst.gov.in; media-src 'self' blob: mediastream; connect-src 'self' *.gst.gov.in wss://127.0.0.1:8080 wss://127.0.0.1:1645 wss://127.0.0.1:1812 wss://127.0.0.1:2083 wss://127.0.0.1:2948 wss://127.0.0.1:1585 wss://127.0.0.1:2095 wss://127.0.0.1:2568 wss://127.0.0.1:4587 wss://127.0.0.1:2868
+# access-control-allow-origin: *
+# access-control-allow-methods: GET, POST
+# access-control-allow-headers: DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Origin,Content-Type,Accept,Pragma,Expires
+# access-control-allow-credentials: true
+# x-frame-options: SAMEORIGIN
+# x-content-type-options: nosniff
+# x-xss-protection: 1; mode=block
+# strict-transport-security: max-age=31536000; includeSubDomains
+# cache-control: private,no-cache
+# cache-control: no-cache, no-store, max-age=0, must-revalidate
+# pragma: no-cache
+# Set-Cookie: TS0134d082=010c0f54dded64efc324de4c6327012ca2d33e9f8be6b1a6d1a83ed6f233d1ee43658281d67374d4f046f2174510e1311989fa0202; Path=/; Domain=.services.gst.gov.in; HttpOnly; Secure
+# Set-Cookie: TSf2521acf027=08b31d24a4ab2000b07bb1933068c5aaa047e264d469bb93c3560e31baf30cca5f20c6c4ff7f842c08a07195ee113000a440de6f671d467822df83b850c0e3712a9f49be5baaa3757d7a85f3860623695ae8616f9358be7809ffff26b922f5bb; Path=/; Secure

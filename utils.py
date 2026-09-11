@@ -12,7 +12,7 @@ class Helper:
     def __init__(self):
         self.TZ = ZoneInfo("Asia/Kolkata")
         pass
-
+    
     @staticmethod
     def generate_uid():
         return uuid4().hex
