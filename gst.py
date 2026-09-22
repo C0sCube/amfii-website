@@ -12,7 +12,9 @@ from logger import setup_logger
 
 warnings.filterwarnings("ignore")
 
-pipe = pipeline("automatic-speech-recognition", model=r"D:\Developers\Kaustubh\whisper-medium")
+pipe = pipeline(
+    "automatic-speech-recognition", model=r"D:\Developers\Kaustubh\whisper-medium"
+)
 utils = Helper()
 logger = setup_logger(name="gstn_log")
 
@@ -26,9 +28,17 @@ headers = {
 }
 
 WORD_TO_DIGIT = {
-    "zero": "0", "oh": "0",
-    "one": "1", "two": "2", "three": "3", "four": "4",
-    "five": "5", "six": "6", "seven": "7", "eight": "8", "nine": "9",
+    "zero": "0",
+    "oh": "0",
+    "one": "1",
+    "two": "2",
+    "three": "3",
+    "four": "4",
+    "five": "5",
+    "six": "6",
+    "seven": "7",
+    "eight": "8",
+    "nine": "9",
 }
 
 year_dict = {
@@ -41,7 +51,7 @@ year_dict = {
     "2023": "2023-2024",
     "2024": "2024-2025",
     "2025": "2025-2026",
-    "2026": "2026-2027"
+    "2026": "2026-2027",
 }
 
 
@@ -55,18 +65,23 @@ def normalize_digits(text: str) -> str:
             digits.append(WORD_TO_DIGIT[tok])
     return "".join(digits)
 
-def solve_captcha(driver, gstin, audio_dir):
-    
-    WebDriverWait(driver, 20).until(
-            EC.invisibility_of_element_located((By.CSS_SELECTOR, ".dimmer-holder"))
-        )
 
-    textbox = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "for_gstin")))
+def solve_captcha(driver, gstin, audio_dir):
+
+    WebDriverWait(driver, 20).until(
+        EC.invisibility_of_element_located((By.CSS_SELECTOR, ".dimmer-holder"))
+    )
+
+    textbox = WebDriverWait(driver, 20).until(
+        EC.presence_of_element_located((By.ID, "for_gstin"))
+    )
     textbox.clear()
     textbox.send_keys(gstin)
 
     audio_button = WebDriverWait(driver, 20).until(
-        EC.element_to_be_clickable((By.XPATH, "//button[i[contains(@class,'fa-volume-up')]]"))
+        EC.element_to_be_clickable(
+            (By.XPATH, "//button[i[contains(@class,'fa-volume-up')]]")
+        )
     )
     audio_button.click()
     logger.info("Audio button clicked...")
@@ -79,7 +94,7 @@ def solve_captcha(driver, gstin, audio_dir):
             msg = json.loads(entry["message"])["message"]
             if msg["method"] == "Network.responseReceived":
                 url = msg["params"]["response"]["url"]
-                if "audiocaptcha" in url:   # keep the same filter
+                if "audiocaptcha" in url:  # keep the same filter
                     request_id = msg["params"]["requestId"]
                     break
         except Exception:
@@ -89,7 +104,11 @@ def solve_captcha(driver, gstin, audio_dir):
         raise Exception("Could not find audiocaptcha request in network logs.")
 
     body = driver.execute_cdp_cmd("Network.getResponseBody", {"requestId": request_id})
-    audio_bytes = base64.b64decode(body["body"]) if body.get("base64Encoded") else body["body"].encode()
+    audio_bytes = (
+        base64.b64decode(body["body"])
+        if body.get("base64Encoded")
+        else body["body"].encode()
+    )
 
     audio_path = Path(audio_dir) / f"captcha_audio_{gstin}.wav"
     with open(audio_path, "wb") as f:
@@ -101,11 +120,13 @@ def solve_captcha(driver, gstin, audio_dir):
     logger.info(f"Captcha solved: {captcha}")
     return captcha
 
+
 def init_session(driver):
     session = requests.Session()
     for cookie in driver.get_cookies():
         session.cookies.set(cookie["name"], cookie["value"])
     return session
+
 
 def fetch_and_save(session, gstin, captcha, output_dir):
     apis = {
@@ -122,43 +143,61 @@ def fetch_and_save(session, gstin, captcha, output_dir):
         try:
             if "?" in url:  # GET
                 resp = session.get(url, headers=headers, verify=False)
-                data = resp.json() if resp.ok else {"status": "Failed", "code": resp.status_code}
+                data = (
+                    resp.json()
+                    if resp.ok
+                    else {"status": "Failed", "code": resp.status_code}
+                )
             elif "taxpayerReturnDetails" in api_name:
                 all_data = []
-                for year,val in year_dict.items():
+                for year, val in year_dict.items():
                     payload = {"gstin": gstin, "fy": year}
-                    resp = session.post(url, json=payload, headers=headers, verify=False)
-                    data = resp.json() if resp.ok else {"status": "Failed", "code": resp.status_code}
-                    
+                    resp = session.post(
+                        url, json=payload, headers=headers, verify=False
+                    )
+                    data = (
+                        resp.json()
+                        if resp.ok
+                        else {"status": "Failed", "code": resp.status_code}
+                    )
+
                     if "filingStatus" not in data:
-                        all_data.extend([
-                        {
-                            "fy": val,
-                            "taxp": "NA",
-                            "mof": "NA",
-                            "dof": "NA",
-                            "rtntype": "NA",
-                            "arn": "NA",
-                            "status": "Data not Found !!",
-                            "gstin":gstin
-                        }])
+                        all_data.extend(
+                            [
+                                {
+                                    "fy": val,
+                                    "taxp": "NA",
+                                    "mof": "NA",
+                                    "dof": "NA",
+                                    "rtntype": "NA",
+                                    "arn": "NA",
+                                    "status": "Data not Found !!",
+                                    "gstin": gstin,
+                                }
+                            ]
+                        )
                     else:
-                        
-                        temp = data.get("filingStatus",[])[0]
+
+                        temp = data.get("filingStatus", [])[0]
                         for t in temp:
                             t["gstin"] = gstin
-                        
+
                         all_data.extend(temp)
                 data = all_data
-            else:           # POST
+            else:  # POST
                 payload = {"gstin": gstin, "captcha": captcha}
                 resp = session.post(url, json=payload, headers=headers, verify=False)
-                data = resp.json() if resp.ok else {"status": "Failed", "code": resp.status_code}
+                data = (
+                    resp.json()
+                    if resp.ok
+                    else {"status": "Failed", "code": resp.status_code}
+                )
             filename = gstin_dir / f"{api_name}.json"
             utils.save_json(data, filename)
             logger.info(f"Saved {api_name} for {gstin} -> {filename}")
         except Exception as e:
             logger.exception(f"Error fetching {api_name} for {gstin}: {e}")
+
 
 def main(gstins):
     options = webdriver.ChromeOptions()
@@ -175,6 +214,10 @@ def main(gstins):
     try:
         driver.get(BASE_SITE)
 
+        WebDriverWait(driver, 20).until(
+            EC.invisibility_of_element_located((By.CSS_SELECTOR, ".dimmer-holder"))
+        )
+
         for idx, gstin in enumerate(gstins, start=1):
             logger.info(f"FETCHING: {idx} /{total_gstins} :: {gstin}")
             captcha = solve_captcha(driver, gstin, audio_dir)
@@ -187,7 +230,9 @@ def main(gstins):
             )
             search_button.click()
             refresh_button = WebDriverWait(driver, 20).until(
-                EC.element_to_be_clickable((By.XPATH, "//button[i[contains(@class,'fa-refresh')]]"))
+                EC.element_to_be_clickable(
+                    (By.XPATH, "//button[i[contains(@class,'fa-refresh')]]")
+                )
             )
             refresh_button.click()
 
@@ -196,7 +241,9 @@ def main(gstins):
                 logger.info("Reloading site after 50 GSTINs...")
                 driver.get(BASE_SITE)
                 WebDriverWait(driver, 20).until(
-                    EC.invisibility_of_element_located((By.CSS_SELECTOR, ".dimmer-holder"))
+                    EC.invisibility_of_element_located(
+                        (By.CSS_SELECTOR, ".dimmer-holder")
+                    )
                 )
 
     except Exception as e:
