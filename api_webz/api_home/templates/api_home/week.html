@@ -1,350 +1,120 @@
-{% extends "base.html" %}
 {% load static %}
-{% block sidebar %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bootstrap Kitchen Sink Demo</title>
+  <link rel="stylesheet" href="{% static 'css/api_home/style.min.css' %}" />
+  <!-- If you use Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+</head>
+<body class="p-4">
 
-      <hr class="sidebar-divider my-0" />
+  <!-- Buttons -->
+  <h2>Buttons</h2>
+  <div class="mb-3">
+    <button class="btn btn-primary">Primary</button>
+    <button class="btn btn-outline-primary">Outline</button>
+    <button class="btn btn-secondary">Secondary</button>
+    <button class="btn btn-success btn-lg">Large Success</button>
+    <button class="btn btn-danger btn-sm">Small Danger</button>
+    <button class="btn btn-warning"><i class="bi bi-exclamation-triangle"></i> Warning w/ Icon</button>
+  </div>
 
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'week' %}">
-          <span>Week Schedule</span>
-        </a>
-      </li>
+  <!-- Badges -->
+  <h2>Badges</h2>
+  <p>
+    Notifications <span class="badge bg-primary">4</span>
+    Messages <span class="badge bg-success">7</span>
+    Alerts <span class="badge bg-danger">!</span>
+  </p>
 
-      <hr class="sidebar-divider" />
+  <!-- Progress Bars -->
+  <h2>Progress Bars</h2>
+  <div class="progress mb-2">
+    <div class="progress-bar" style="width: 25%">25%</div>
+  </div>
+  <div class="progress mb-2">
+    <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width: 50%">Loading…</div>
+  </div>
 
+  <!-- Cards -->
+  <h2>Cards</h2>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <img src="https://via.placeholder.com/300x150" class="card-img-top" alt="Placeholder">
+        <div class="card-body">
+          <h5 class="card-title">Card Title</h5>
+          <p class="card-text">Quick example text to build on the card title.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-white bg-success mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Success Card</h5>
+          <p class="card-text">This card uses contextual background.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border-danger mb-3">
+        <div class="card-header">Header</div>
+        <div class="card-body text-danger">
+          <h5 class="card-title">Danger Card</h5>
+          <p class="card-text">Card with border and header.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'home' %}">
+  <!-- Tables -->
+  <h2>Tables</h2>
+  <table class="table table-striped table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>#</th><th>Name</th><th>Status</th><th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>Kaustubh</td><td><span class="badge bg-success">Active</span></td><td><button class="btn btn-sm btn-primary">Edit</button></td></tr>
+      <tr><td>2</td><td>John</td><td><span class="badge bg-warning">Pending</span></td><td><button class="btn btn-sm btn-secondary">View</button></td></tr>
+      <tr><td>3</td><td>Jane</td><td><span class="badge bg-danger">Blocked</span></td><td><button class="btn btn-sm btn-danger">Delete</button></td></tr>
+    </tbody>
+  </table>
 
-          <span>Task Manager</span>
-        </a>
+  <!-- Forms -->
+  <h2>Forms</h2>
+  <form>
+    <div class="mb-3">
+      <label for="inputEmail" class="form-label">Email address</label>
+      <input type="email" class="form-control" id="inputEmail" placeholder="name@example.com">
+    </div>
+    <div class="mb-3">
+      <label for="inputPassword" class="form-label">Password</label>
+      <input type="password" class="form-control" id="inputPassword">
+    </div>
+    <div class="mb-3">
+      <label for="selectExample" class="form-label">Select Example</label>
+      <select class="form-select" id="selectExample">
+        <option>Option 1</option>
+        <option>Option 2</option>
+      </select>
+    </div>
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" id="checkMe">
+      <label class="form-check-label" for="checkMe">Check me out</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 
-      </li>
+  <!-- Icons -->
+  <h2 class="mt-4">Icons (Bootstrap Icons)</h2>
+  <i class="bi bi-alarm"></i> Alarm  
+  <i class="bi bi-cloud-download"></i> Download  
+  <i class="bi bi-heart-fill text-danger"></i> Heart  
 
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'bulk_home' %}">
-
-          <span>Bulk Download</span>
-        </a>
-
-      </li>
-
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="{% url 'week' %}" data-toggle="collapse" data-target="#collapseTwo"
-          aria-expanded="true" aria-controls="collapseTwo">
-
-          <span>Week Schedule</span>
-        </a>
-        <!-- <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
-                    </div>
-                </div> -->
-      </li>
-{% endblock %}
-
-{% block navbar %}
-  <div class="input-group d-flex align-items-center"></div>
-
-  <a href="{% url 'home' %}" class="btn btn-primary d-flex align-items-center" role="button">
-    <span class="material-symbols-outlined"> arrow_back </span>
-  </a>
-
-{% endblock %}
-
-{% block container %}
-          <div class="table-responsive flex-grow-1 overflow-auto">
-            <table class="table table-bordered table-hover align-middle text-center mb-0"
-              style="table-layout: fixed; width: 100%">
-              <thead>
-                <tr>
-                  <th scope="col" style="width: 80px">TIME</th>
-
-                  <th scope="col">MON</th>
-                  <th scope="col">TUE</th>
-                  <th scope="col">WED</th>
-                  <th scope="col">THU</th>
-                  <th scope="col">FRI</th>
-                  <th scope="col">SAT</th>
-                  <th scope="col">SUN</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr>
-                  <th scope="row" class="table-light">0000</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-
-                <tr>
-                  <th scope="row" class="table-light">0100</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-
-                <tr>
-                  <th scope="row" class="table-light">0200</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-
-                <tr>
-                  <th scope="row" class="table-light">0300</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-
-                <tr>
-                  <th scope="row" class="table-light">0400</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-
-                <tr>
-                  <th scope="row" class="table-light">0500</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-
-                <tr>
-                  <th scope="row" class="table-light">0600</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-
-                <tr>
-                  <th scope="row" class="table-light">0700</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-
-                <tr>
-                  <th scope="row" class="table-light">0800</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-
-                <tr>
-                  <th scope="row" class="table-light">0900</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-
-                <tr>
-                  <th scope="row" class="table-light">1000</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-
-                <tr>
-                  <th scope="row" class="table-light">1100</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-
-                <tr>
-                  <th scope="row" class="table-light">1200</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-
-                <tr>
-                  <th scope="row" class="table-light">1300</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-
-                <tr>
-                  <th scope="row" class="table-light">1400</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-
-                <tr>
-                  <th scope="row" class="table-light">1500</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-
-                <tr>
-                  <th scope="row" class="table-light">1600</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-
-                <tr>
-                  <th scope="row" class="table-light">1700</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-
-                <tr>
-                  <th scope="row" class="table-light">1800</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-
-                <tr>
-                  <th scope="row" class="table-light">1900</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-
-                <tr>
-                  <th scope="row" class="table-light">2000</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-
-                <tr>
-                  <th scope="row" class="table-light">2100</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-
-                <tr>
-                  <th scope="row" class="table-light">2200</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-
-                <tr>
-                  <th scope="row" class="table-light">2300</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-{% endblock %}
-
-
-{% block scripts %}
-  <script src="{% static 'js/api_home/script.js' %}"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-{% endblock %}
+</body>
+</html>

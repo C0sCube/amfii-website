@@ -102,3 +102,39 @@ async function getBulkFormJSON() {
     csv_file: files,
   };
 }
+
+
+// window.renderBulkTask = function(taskId) {
+//   // Build the URL here
+//   const url = `${taskId}/`;
+//   console.log("Fetching:", url);  // Debug line
+//   console.log("renderBulkTask called with:", taskId);
+
+//   fetch(url)
+//     .then(response => {
+//       if (!response.ok) {
+//         throw new Error(`HTTP error! Status: ${response.status}`);
+//       }
+//       return response.text();
+//     })
+//     .then(html => {
+//       const container = document.getElementById("expandedTask");
+//       container.hidden = false;   // unhide the block
+//       container.innerHTML = html; // inject the task detail
+//     })
+//     .catch(err => console.error("Error loading task:", err));
+// };
+
+window.renderBulkTask = function(taskId) {
+  // Build the URL with the bulk prefix
+  const url = `/bulk/${taskId}/`;
+
+  console.log("Navigating to:", url);
+  // Open in same window
+  window.location.href = url;
+
+  // Or, if you want a new tab:
+  // window.open(url, "_blank");
+};
+
+

@@ -1,0 +1,57 @@
+<div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover align-middle">
+        <thead class="thead-dark">
+            <tr>
+                <th style="width: 30px;">Sr</th>
+                <th class="text-nowrap">Task Name</th>
+                <th class="text-nowrap" style="width: 80px;">Task ID</th>
+                <th style="width: 100px;">Status</th>
+                <th class="text-nowrap" style="width: 200px;">Owner</th>
+                <th style="width: 150px;">Progress</th>
+                <th style="width: 150px;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td class="fw-bold text-gray-800">{{ task.name }}</td>
+                <td>{{ task.id }}</td>
+                <td><span class="badge
+                    {% if task.status == 'COMPLETED' %}
+                        bg-success
+                    {% elif task.status == 'RUNNING' %}
+                        bg-primary
+                    {% elif task.status == 'FAILED' %}
+                        bg-danger
+                    {% else %}
+                        bg-secondary
+                    {% endif %}
+                    " style="width: 80px;">
+                        {{ task.status }}
+                    </span></td>
+                <td>
+                    {% for owner in task.owner %}
+                    {{ owner }}{% if not forloop.last %}, {% endif %}
+                    {% empty %}
+                    -
+                    {% endfor %}
+                </td>
+                <td>{{ task.downloaded_files }}/{{ task.total_files }}</td>
+                <td>
+
+                    <button type="button" class="btn btn-sm btn-primary me-2" onclick="renderBulkTask('{{ task.id }}')">
+                        View
+                    </button>
+
+
+
+                    <button type="button" class="btn btn-sm btn-danger" data-task-id="{{ task.id }}">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
