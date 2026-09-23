@@ -1,20 +1,25 @@
-import os, re, json, base64, time, warnings
+import re, json, base64, time, warnings
 from pathlib import Path
+
 import requests
+import pandas as pd
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
 from transformers import pipeline
-import pandas as pd
 from utils import Helper
 from logger import setup_logger
 
 warnings.filterwarnings("ignore")
 
 pipe = pipeline(
-    "automatic-speech-recognition", model=r"D:\Developers\Kaustubh\whisper-medium"
+    "automatic-speech-recognition",
+    model=r"E:\AI_Models\whisper-medium"
 )
+
 utils = Helper()
 logger = setup_logger(name="gstn_log")
 
@@ -28,232 +33,467 @@ headers = {
 }
 
 WORD_TO_DIGIT = {
-    "zero": "0",
-    "oh": "0",
-    "one": "1",
-    "two": "2",
-    "three": "3",
-    "four": "4",
-    "five": "5",
-    "six": "6",
-    "seven": "7",
-    "eight": "8",
-    "nine": "9",
+    "zero": "0", "oh": "0", "one": "1", "two": "2",
+    "three": "3", "four": "4", "five": "5",
+    "six": "6", "seven": "7", "eight": "8", "nine": "9"
 }
 
 year_dict = {
-    "2017": "2017-2018",
-    "2018": "2018-2019",
-    "2019": "2019-2020",
-    "2020": "2020-2021",
-    "2021": "2021-2022",
-    "2022": "2022-2023",
-    "2023": "2023-2024",
-    "2024": "2024-2025",
-    "2025": "2025-2026",
-    "2026": "2026-2027",
+    str(y): f"{y}-{y + 1}" for y in range(2017, 2027)
 }
 
 
-def normalize_digits(text: str) -> str:
-    tokens = re.findall(r"\w+", text.lower())
-    digits = []
-    for tok in tokens:
-        if tok.isdigit():
-            digits.append(tok)
-        elif tok in WORD_TO_DIGIT:
-            digits.append(WORD_TO_DIGIT[tok])
-    return "".join(digits)
+# ============================================================
+# HELPERS
+# ============================================================
 
-
-def solve_captcha(driver, gstin, audio_dir):
-
+def wait_site(driver):
     WebDriverWait(driver, 20).until(
-        EC.invisibility_of_element_located((By.CSS_SELECTOR, ".dimmer-holder"))
-    )
-
-    textbox = WebDriverWait(driver, 20).until(
-        EC.presence_of_element_located((By.ID, "for_gstin"))
-    )
-    textbox.clear()
-    textbox.send_keys(gstin)
-
-    audio_button = WebDriverWait(driver, 20).until(
-        EC.element_to_be_clickable(
-            (By.XPATH, "//button[i[contains(@class,'fa-volume-up')]]")
+        EC.invisibility_of_element_located(
+            (By.CSS_SELECTOR, ".dimmer-holder")
         )
     )
-    audio_button.click()
-    logger.info("Audio button clicked...")
 
-    time.sleep(5)
-    logs = driver.get_log("performance")
-    request_id = None
-    for entry in logs:
+
+def request(session, method, url, payload=None, retries=3):
+    last_error = None
+
+    for attempt in range(1, retries + 1):
         try:
-            msg = json.loads(entry["message"])["message"]
-            if msg["method"] == "Network.responseReceived":
-                url = msg["params"]["response"]["url"]
-                if "audiocaptcha" in url:  # keep the same filter
-                    request_id = msg["params"]["requestId"]
+            r = session.request(
+                method,
+                url,
+                json=payload,
+                headers=headers,
+                verify=False,
+                timeout=30
+            )
+
+            if not r.ok:
+                raise requests.HTTPError(
+                    f"HTTP {r.status_code}: {r.text[:200]}"
+                )
+
+            return r.json()
+
+        except Exception as e:
+            last_error = e
+            logger.warning(
+                f"{method} {url} failed "
+                f"({attempt}/{retries}): {e}"
+            )
+
+            if attempt < retries:
+                time.sleep(attempt * 2)
+
+    raise last_error
+
+
+def normalize_digits(text):
+    result = []
+
+    for token in re.findall(r"\w+", text.lower()):
+        if token.isdigit():
+            result.append(token)
+        elif token in WORD_TO_DIGIT:
+            result.append(WORD_TO_DIGIT[token])
+
+    return "".join(result)
+
+
+# ============================================================
+# CAPTCHA
+# ============================================================
+
+def solve_captcha(driver, gstin, audio_dir, retries=3):
+
+    last_error = None
+
+    for attempt in range(1, retries + 1):
+        try:
+            wait_site(driver)
+
+            box = WebDriverWait(driver, 20).until(
+                EC.presence_of_element_located(
+                    (By.ID, "for_gstin")
+                )
+            )
+
+            box.clear()
+            box.send_keys(gstin)
+
+            WebDriverWait(driver, 20).until(
+                EC.element_to_be_clickable(
+                    (
+                        By.XPATH,
+                        "//button[i[contains(@class,'fa-volume-up')]]"
+                    )
+                )
+            ).click()
+
+            logger.info(
+                f"[{gstin}] CAPTCHA attempt "
+                f"{attempt}/{retries}"
+            )
+
+            # Poll network logs instead of blindly waiting 5 sec
+            request_id = None
+
+            for _ in range(20):
+                time.sleep(0.5)
+
+                for entry in driver.get_log("performance"):
+                    try:
+                        msg = json.loads(entry["message"])["message"]
+
+                        if msg["method"] == "Network.responseReceived":
+                            url = msg["params"]["response"]["url"]
+
+                            if "audiocaptcha" in url:
+                                request_id = msg["params"]["requestId"]
+                                break
+
+                    except Exception:
+                        pass
+
+                if request_id:
                     break
-        except Exception:
-            pass
 
-    if not request_id:
-        raise Exception("Could not find audiocaptcha request in network logs.")
+            if not request_id:
+                raise RuntimeError(
+                    "audiocaptcha request not found"
+                )
 
-    body = driver.execute_cdp_cmd("Network.getResponseBody", {"requestId": request_id})
-    audio_bytes = (
-        base64.b64decode(body["body"])
-        if body.get("base64Encoded")
-        else body["body"].encode()
-    )
+            body = driver.execute_cdp_cmd(
+                "Network.getResponseBody",
+                {"requestId": request_id}
+            )
 
-    audio_path = Path(audio_dir) / f"captcha_audio_{gstin}.wav"
-    with open(audio_path, "wb") as f:
-        f.write(audio_bytes)
+            audio = (
+                base64.b64decode(body["body"])
+                if body.get("base64Encoded")
+                else body["body"].encode()
+            )
 
-    result = pipe(str(audio_path))
-    captcha_digits = normalize_digits(result["text"])
-    captcha = re.sub(r"[^0-9]", "", captcha_digits)
-    logger.info(f"Captcha solved: {captcha}")
-    return captcha
+            audio_path = (
+                Path(audio_dir)
+                / f"captcha_audio_{gstin}.wav"
+            )
 
+            audio_path.write_bytes(audio)
+
+            text = pipe(str(audio_path))["text"]
+            captcha = re.sub(
+                r"\D",
+                "",
+                normalize_digits(text)
+            )
+
+            if not captcha:
+                raise ValueError(
+                    f"Could not decode CAPTCHA: {text!r}"
+                )
+
+            logger.info(
+                f"[{gstin}] CAPTCHA solved: {captcha}"
+            )
+
+            return captcha
+
+        except Exception as e:
+            last_error = e
+
+            logger.warning(
+                f"[{gstin}] CAPTCHA failed: {e}"
+            )
+
+            if attempt < retries:
+                try:
+                    refresh_captcha(driver)
+                except Exception:
+                    pass
+
+    raise RuntimeError(
+        f"CAPTCHA failed after {retries} attempts"
+    ) from last_error
+
+
+# ============================================================
+# SESSION
+# ============================================================
 
 def init_session(driver):
     session = requests.Session()
+
     for cookie in driver.get_cookies():
-        session.cookies.set(cookie["name"], cookie["value"])
+        session.cookies.set(
+            cookie["name"],
+            cookie["value"]
+        )
+
     return session
 
 
+# ============================================================
+# API FETCH
+# ============================================================
+
 def fetch_and_save(session, gstin, captcha, output_dir):
-    apis = {
-        "taxpayerDetails": "https://services.gst.gov.in/services/api/search/taxpayerDetails",
-        "taxpayerReturnDetails": "https://services.gst.gov.in/services/api/search/taxpayerReturnDetails",
-        "goodservice": f"https://services.gst.gov.in/services/api/search/goodservice?gstin={gstin}",
-        "dropdownfinyear": f"https://services.gst.gov.in/services/api/dropdownfinyear?gstin={gstin}",
+
+    urls = {
+        "taxpayerDetails":
+            "https://services.gst.gov.in/services/api/search/taxpayerDetails",
+
+        "taxpayerReturnDetails":
+            "https://services.gst.gov.in/services/api/search/taxpayerReturnDetails",
+
+        "goodservice":
+            f"https://services.gst.gov.in/services/api/search/"
+            f"goodservice?gstin={gstin}",
+
+        "dropdownfinyear":
+            f"https://services.gst.gov.in/services/api/"
+            f"dropdownfinyear?gstin={gstin}",
     }
 
     gstin_dir = Path(output_dir) / gstin
     gstin_dir.mkdir(parents=True, exist_ok=True)
 
-    for api_name, url in apis.items():
+    failed = []
+
+    for name, url in urls.items():
+
         try:
-            if "?" in url:  # GET
-                resp = session.get(url, headers=headers, verify=False)
-                data = (
-                    resp.json()
-                    if resp.ok
-                    else {"status": "Failed", "code": resp.status_code}
-                )
-            elif "taxpayerReturnDetails" in api_name:
-                all_data = []
-                for year, val in year_dict.items():
-                    payload = {"gstin": gstin, "fy": year}
-                    resp = session.post(
-                        url, json=payload, headers=headers, verify=False
-                    )
-                    data = (
-                        resp.json()
-                        if resp.ok
-                        else {"status": "Failed", "code": resp.status_code}
-                    )
 
-                    if "filingStatus" not in data:
-                        all_data.extend(
-                            [
-                                {
-                                    "fy": val,
-                                    "taxp": "NA",
-                                    "mof": "NA",
-                                    "dof": "NA",
-                                    "rtntype": "NA",
-                                    "arn": "NA",
-                                    "status": "Data not Found !!",
-                                    "gstin": gstin,
-                                }
-                            ]
+            # GET
+            if "?" in url:
+                data = request(session, "GET", url)
+
+            # RETURN DETAILS
+            elif name == "taxpayerReturnDetails":
+
+                data = []
+
+                for year, fy in year_dict.items():
+
+                    try:
+                        result = request(
+                            session,
+                            "POST",
+                            url,
+                            {"gstin": gstin, "fy": year}
                         )
-                    else:
 
-                        temp = data.get("filingStatus", [])[0]
-                        for t in temp:
-                            t["gstin"] = gstin
+                        if "filingStatus" in result:
+                            rows = result["filingStatus"][0]
 
-                        all_data.extend(temp)
-                data = all_data
-            else:  # POST
-                payload = {"gstin": gstin, "captcha": captcha}
-                resp = session.post(url, json=payload, headers=headers, verify=False)
-                data = (
-                    resp.json()
-                    if resp.ok
-                    else {"status": "Failed", "code": resp.status_code}
+                            for row in rows:
+                                row["gstin"] = gstin
+
+                            data.extend(rows)
+
+                        else:
+                            data.append({
+                                "fy": fy,
+                                "taxp": "NA",
+                                "mof": "NA",
+                                "dof": "NA",
+                                "rtntype": "NA",
+                                "arn": "NA",
+                                "status": "Data not Found !!",
+                                "gstin": gstin
+                            })
+
+                    except Exception as e:
+                        logger.warning(
+                            f"[{gstin}] FY {year} failed: {e}"
+                        )
+
+                        data.append({
+                            "fy": fy,
+                            "status": "Request Failed",
+                            "gstin": gstin,
+                            "error": str(e)
+                        })
+
+            # POST
+            else:
+                data = request(
+                    session,
+                    "POST",
+                    url,
+                    {
+                        "gstin": gstin,
+                        "captcha": captcha
+                    }
                 )
-            filename = gstin_dir / f"{api_name}.json"
-            utils.save_json(data, filename)
-            logger.info(f"Saved {api_name} for {gstin} -> {filename}")
-        except Exception as e:
-            logger.exception(f"Error fetching {api_name} for {gstin}: {e}")
 
+            filename = gstin_dir / f"{name}.json"
+            utils.save_json(data, filename)
+
+            logger.info(
+                f"[{gstin}] Saved {name}"
+            )
+
+        except Exception as e:
+
+            failed.append(name)
+
+            logger.exception(
+                f"[{gstin}] {name} failed: {e}"
+            )
+
+    return failed
+
+
+# ============================================================
+# CAPTCHA REFRESH / SITE RESET
+# ============================================================
+
+def refresh_captcha(driver):
+
+    wait_site(driver)
+
+    WebDriverWait(driver, 20).until(
+        EC.element_to_be_clickable(
+            (By.ID, "lotsearch")
+        )
+    ).click()
+
+    WebDriverWait(driver, 20).until(
+        EC.element_to_be_clickable(
+            (
+                By.XPATH,
+                "//button[i[contains(@class,'fa-refresh')]]"
+            )
+        )
+    ).click()
+
+
+def reload_site(driver):
+    logger.info("Reloading GSTN site...")
+    driver.get(BASE_SITE)
+    wait_site(driver)
+
+
+# ============================================================
+# MAIN
+# ============================================================
 
 def main(gstins):
+
     options = webdriver.ChromeOptions()
-    options.set_capability("goog:loggingPrefs", {"performance": "ALL"})
+    options.set_capability(
+        "goog:loggingPrefs",
+        {"performance": "ALL"}
+    )
+
     driver = webdriver.Chrome(options=options)
-    driver.execute_cdp_cmd("Network.enable", {})
+
+    driver.execute_cdp_cmd(
+        "Network.enable",
+        {}
+    )
 
     audio_dir = Path("output/gstn_audio")
-    audio_dir.mkdir(parents=True, exist_ok=True)
     output_dir = Path("output/gstin_json2")
+    failed_file = Path("output/gstin_failed.json")
+
+    audio_dir.mkdir(parents=True, exist_ok=True)
     output_dir.mkdir(parents=True, exist_ok=True)
-    total_gstins = len(gstins)
+
+    failed_gstins = []
 
     try:
-        driver.get(BASE_SITE)
 
-        WebDriverWait(driver, 20).until(
-            EC.invisibility_of_element_located((By.CSS_SELECTOR, ".dimmer-holder"))
+        reload_site(driver)
+
+        for idx, gstin in enumerate(gstins, 1):
+
+            logger.info(
+                f"{'=' * 60}\n"
+                f"GSTIN {idx}/{len(gstins)} :: {gstin}"
+            )
+
+            try:
+
+                captcha = solve_captcha(
+                    driver,
+                    gstin,
+                    audio_dir
+                )
+
+                session = init_session(driver)
+
+                failed_apis = fetch_and_save(
+                    session,
+                    gstin,
+                    captcha,
+                    output_dir
+                )
+
+                if failed_apis:
+                    failed_gstins.append({
+                        "gstin": gstin,
+                        "failed_apis": failed_apis
+                    })
+
+                refresh_captcha(driver)
+
+            except Exception as e:
+
+                logger.exception(
+                    f"[{gstin}] FAILED: {e}"
+                )
+
+                failed_gstins.append({
+                    "gstin": gstin,
+                    "error": str(e)
+                })
+
+                # Recover browser before next GSTIN
+                try:
+                    reload_site(driver)
+                except Exception:
+                    logger.exception(
+                        "Browser recovery failed"
+                    )
+                    break
+
+            if idx % 50 == 0:
+                reload_site(driver)
+
+        failed_file.write_text(
+            json.dumps(
+                failed_gstins,
+                indent=2
+            ),
+            encoding="utf-8"
         )
 
-        for idx, gstin in enumerate(gstins, start=1):
-            logger.info(f"FETCHING: {idx} /{total_gstins} :: {gstin}")
-            captcha = solve_captcha(driver, gstin, audio_dir)
-            session = init_session(driver)
-            fetch_and_save(session, gstin, captcha, output_dir)
+        logger.info(
+            f"Finished. "
+            f"Failed GSTINs: {len(failed_gstins)}"
+        )
 
-            # refresh captcha UI for next GSTIN
-            search_button = WebDriverWait(driver, 20).until(
-                EC.element_to_be_clickable((By.ID, "lotsearch"))
-            )
-            search_button.click()
-            refresh_button = WebDriverWait(driver, 20).until(
-                EC.element_to_be_clickable(
-                    (By.XPATH, "//button[i[contains(@class,'fa-refresh')]]")
-                )
-            )
-            refresh_button.click()
-
-            # After every 50 GSTINs, reload the whole site
-            if idx % 50 == 0:
-                logger.info("Reloading site after 50 GSTINs...")
-                driver.get(BASE_SITE)
-                WebDriverWait(driver, 20).until(
-                    EC.invisibility_of_element_located(
-                        (By.CSS_SELECTOR, ".dimmer-holder")
-                    )
-                )
-
-    except Exception as e:
-        logger.exception(e)
     finally:
         driver.quit()
 
 
+# ============================================================
+# ENTRY
+# ============================================================
+
 if __name__ == "__main__":
-    csv_path = r"FETCH.csv"
-    df = pd.read_csv(csv_path)
-    gstins = df["gstin"].to_list()[200:]
+
+    df = pd.read_csv("FETCH.csv")
+
+    gstins = (
+        df["gstin"]
+        .dropna()
+        .astype(str)
+        .str.strip()
+        .tolist()[1000:]
+    )
+
     main(gstins)
