@@ -37,10 +37,22 @@ async function createBulkTask() {
 
     const result = await response.json();
 
-    console.log("Server response:", result);
+    // console.log("Server response:", result);
 
     if (!response.ok) {
       throw new Error(result.error || "Failed to create task.");
+    }
+
+    // Close the modal
+    const modalEl = document.getElementById("bulkForm");
+    if (modalEl) {
+      const modal = bootstrap.Modal.getInstance(modalEl);
+      if (modal) modal.hide();
+    }
+
+    //Show the new task
+    if (result.id) {
+      renderBulkTask(result.id);
     }
 
   } catch (error) {
@@ -53,6 +65,8 @@ async function getBulkFormJSON() {
   const throttle = Number(document.getElementById("taskThrottle").value) || 0;
   const headersText = document.getElementById("taskHeaders").value.trim();
   const file = document.getElementById("taskFile").files[0];
+  const verify = document.getElementById("taskVerify").value.trim() === "true";
+
 
   // Parse headers
   let headers = {};
@@ -97,6 +111,7 @@ async function getBulkFormJSON() {
   // Final JSON
   return {
     task_name: taskName,
+    verify_request:verify,
     throttle: throttle,
     headers: headers,
     csv_file: files,
@@ -104,37 +119,63 @@ async function getBulkFormJSON() {
 }
 
 
-// window.renderBulkTask = function(taskId) {
-//   // Build the URL here
-//   const url = `${taskId}/`;
-//   console.log("Fetching:", url);  // Debug line
-//   console.log("renderBulkTask called with:", taskId);
-
-//   fetch(url)
-//     .then(response => {
-//       if (!response.ok) {
-//         throw new Error(`HTTP error! Status: ${response.status}`);
-//       }
-//       return response.text();
-//     })
-//     .then(html => {
-//       const container = document.getElementById("expandedTask");
-//       container.hidden = false;   // unhide the block
-//       container.innerHTML = html; // inject the task detail
-//     })
-//     .catch(err => console.error("Error loading task:", err));
-// };
 
 window.renderBulkTask = function(taskId) {
-  // Build the URL with the bulk prefix
+  const bar = document.getElementById("progressBar");
+  if (bar) {
+    bar.style.width = "0%";   // reset to empty
+    bar.setAttribute("aria-valuenow", 0);
+  }
+
   const url = `/bulk/${taskId}/`;
-
   console.log("Navigating to:", url);
-  // Open in same window
   window.location.href = url;
-
-  // Or, if you want a new tab:
-  // window.open(url, "_blank");
 };
+
+
+
+async function refreshTask(taskId) {
+  const btn = document.querySelector("#refreshBtn");
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = "Refreshing…";
+  }
+
+  try {
+    const res = await fetch(`/bulk/${taskId}/status`);
+    const data = await res.json();
+
+    document.querySelector("#progressText").textContent =
+      `Progress: ${data.downloaded_files}/${data.total_files}`;
+    document.querySelector("#failedText").textContent =
+      `Failed: ${data.failed_files}`;
+
+    const bar = document.querySelector("#progressBar");
+    bar.style.width = `${(data.downloaded_files / data.total_files) * 100}%`;
+    bar.setAttribute("aria-valuenow", data.downloaded_files);
+
+    // Update logs
+    const logViewer = document.querySelector("#logViewer .bg-dark");
+    logViewer.innerHTML = "";
+    data.logs.forEach(line => {
+      const div = document.createElement("div");
+      div.textContent = line;
+      logViewer.appendChild(div);
+    });
+
+  } catch (err) {
+    alert("Error refreshing task: " + err.message);
+  } finally {
+    
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = "Refresh";
+    }
+  }
+}
+
+
+// Delete task and reload page
+
 
 

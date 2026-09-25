@@ -42,9 +42,21 @@
                         </label>
                     </div>
 
-                    <div class="col-md-9">
+                    <div class="col-md-3">
                         <input type="number" class="form-control" id="taskThrottle" , name="throttle" , value="0"
                             min="0">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="taskThrottle" class="form-label fw-semibold">
+                            Verify
+                        </label>
+                    </div>
+
+                    <div class="col-md-3">
+                        <select class="form-control" id="taskVerify" name="verify">
+                            <option value="true">True</option>
+                            <option value="false">False</option>
+                        </select>
                     </div>
                 </div>
 
@@ -61,12 +73,14 @@
                     </div>
 
                     <div class="col-md-9">
-                        <textarea class="form-control" id="taskHeaders" , name="headers" , rows="6"
-                            placeholder='{"User-Agent": "Mozilla/5.0"}'>
-                        </textarea>
-                        <small class="text-muted">
-                            Optional JSON request headers.
-                        </small>
+                        <textarea class="form-control" id="taskHeaders" name="headers" rows="6">{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+                            "Accept": "*/*",
+                            "Accept-Encoding": "gzip, deflate, br",
+                            "Connection": "keep-alive",
+                            "Referer": "https://example.com/init",
+                            "Accept-Language": "en-US,en;q=0.9"}</textarea>
+                        <small class="text-muted">Optional JSON request headers.</small>
+
                     </div>
                 </div>
 

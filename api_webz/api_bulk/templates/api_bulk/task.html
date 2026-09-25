@@ -1,5 +1,28 @@
 {% extends "base.html" %}
 {% load static %}
+
+{% block header %}
+
+<style>
+  /* Laptops (medium screens) */
+  @media (min-width: 600px) and (max-width: 1200px) {
+    #logViewer {
+      max-height: 250px;
+      font-size: 14px;
+    }
+  }
+
+  /* Large desktops / 24-inch monitors */
+  @media (min-width: 1201px) {
+    #logViewer {
+      max-height: 520px;
+      font-size: 16px;
+    }
+  }
+</style>
+
+{% endblock %}
+
 {% block sidebar %}
 <li class="nav-item active">
   <a class="nav-link" href="#index.html">
@@ -13,14 +36,14 @@
 {% block navbar %}
 <div class="input-group d-flex align-items-center">
 </div>
-<a href="{% url 'home' %}" class="btn btn-primary d-flex align-items-center" role="button">
+<a href="{% url 'bulk' %}" class="btn btn-primary d-flex align-items-center" role="button">
   <span class="material-symbols-outlined">arrow_back</span>
 </a>
 {% endblock %}
 
 {% block container %}
 
-<div class="card min-vh-100 d-flex flex-column">
+<div class="card">
   <!-- Header -->
   <div class="card-header d-flex justify-content-between align-items-center px-4">
     <h3 class="mb-0">{{ task.name }} <small class="text-muted">({{ task.id }})</small></h3>
@@ -29,19 +52,21 @@
 
 
   <!-- Body -->
-  <div class="card-body px-4 flex-grow-1">
+  <div class="card-body px-4">
     <!-- Progress full row -->
     <div class="mb-3">
       <div class="d-flex justify-content-between align-items-center mb-1">
-        <small>Progress: {{ task.downloaded_files }}/{{ task.total_files }}</small>
-        <small class="text-danger">Failed: {{ task.failed_files }}</small>
+        <small id="progressText">Progress: {{ task.downloaded_files }}/{{ task.total_files }}</small>
+        <small id="failedText" class="text-danger">Failed: {{ task.failed_files }}</small>
       </div>
       <div class="progress" style="height: 8px;">
-        <div class="progress-bar bg-success" role="progressbar" aria-valuenow="{{ task.downloaded_files }}"
-          aria-valuemin="0" aria-valuemax="{{ task.total_files }}">
+        <div class="progress-bar bg-success" id="progressBar" role="progressbar"
+          aria-valuenow="{{ task.downloaded_files }}" aria-valuemin="0" aria-valuemax="{{ task.total_files }}">
         </div>
       </div>
+
     </div>
+
 
     <!-- Details + Logs -->
     <div class="row">
@@ -51,9 +76,9 @@
           <div class="card-body">
             <p><strong>Task dir:</strong> {{ task.task_dir }}</p>
             <ul>
-              <li><a href="{{ task.task_dir }}/files/">Browse Files</a></li>
-              <li><a href="{{ task.task_dir }}/meta.json">View Metadata</a></li>
-              <li><a href="{{ task.task_dir }}/zip/{{ task.id }}.zip">Download Zip</a></li>
+              <li><a href="{% url 'browse_files' task.id %}">Browse Files</a></li>
+              <li><a href="{% url 'view_meta' task.id %}">View Metadata</a></li>
+              <li><a href="{% url 'browse_zip' task.id %}">Download Zip</a></li>
             </ul>
           </div>
         </div>
@@ -68,20 +93,18 @@
 
       <!-- Right side logs -->
       <div class="col-md-8">
-        <div class="card h-100">
-          <div class="card-body">
-            <h5>Program Logs</h5>
-            <div class="log-viewer bg-dark text-light p-2 rounded"
-              style="height:90%; overflow-y:auto; font-family:monospace;">
+        <div class="card h-100 d-flex flex-column">
+
+          <div id="logViewer" class="card-body flex-grow-1 overflow-auto px-4" style="font-family:monospace;">
+            <div class="bg-dark text-light p-2 rounded">
               {% for line in task.logs %}
               <div>{{ line }}</div>
-              {% empty %}
-              <div class="text-muted">No logs available</div>
               {% endfor %}
             </div>
-
           </div>
+
         </div>
+
       </div>
     </div>
   </div>
@@ -89,20 +112,20 @@
   <!-- Footer -->
   <div class="card-footer d-flex justify-content-between align-items-center px-4">
     <div class="d-flex justify-content-left align-items-center">
-      <small  class="me-3"><strong>Owner(s):</strong> {{ task.owner|join:", " }}</small>
+      <small class="me-3"><strong>Owner(s):</strong> {{ task.owner|join:", " }}</small>
       <small class="me-3"><strong>Created At:</strong> {{ task.created_at }}</small>
       <small class="me-3"><strong>Completed At:</strong> {{ task.completed_at|default:"-" }}</small>
 
     </div>
 
     <div>
+      <button class="btn btn-primary" onclick="refreshTask('{{ task.id }}')">Refresh</button>
       <button class="btn btn-secondary me-2">Download Full Log</button>
-      <button class="btn btn-primary me-2">Restart Task</button>
+      <!-- <button class="btn btn-primary me-2">Restart Task</button> -->
       <button class="btn btn-danger">Delete Task</button>
     </div>
   </div>
 </div>
-
 
 {% endblock %}
 

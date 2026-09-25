@@ -28,6 +28,7 @@ class DownloadTask(models.Model):
     # Configuration
     headers = models.JSONField(default=dict)
     throttle = models.IntegerField(default=0)
+    verify_request = models.BooleanField(default=False)
 
     # Filesystem
     task_dir = models.CharField(max_length=500)
