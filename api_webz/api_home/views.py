@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 #program imports
 from .auth import authenticate_user
 
-TESTING = False  # set false for production
+TESTING = True  # set false for production
 # recent change
 HOME_TEMPLATE = "api_home/index.html"
 WEEK_TEMPLATE = "api_home/week.html"
@@ -23,6 +23,8 @@ def login_view(request):
                 request, LOGIN_TEMPLATE, {"error": "Both fields are required"}
             )
 
+        print(f"USERNAME: {username} || PASSWORD: {password}")
+        
         # bypass LDAP
         if TESTING:
             if username == "abc@xyz.com" and password == "1234":

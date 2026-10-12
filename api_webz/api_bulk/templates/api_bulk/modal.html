@@ -17,21 +17,45 @@
             <!-- Body -->
             <div class="modal-body">
 
-                <div class="mb-4">
+                <!-- <div class="mb-4">
                     <h6 class="text-primary fw-bold">Task Information</h6>
                     <hr>
-                </div>
+                </div> -->
 
                 <div class="row mb-3 align-items-center">
                     <div class="col-md-3">
                         <label for="taskName" class="form-label fw-semibold">
-                            Task Name
+                            <h6 class="text-primary fw-bold">TASK NAME</h6>
                         </label>
                     </div>
 
                     <div class="col-md-9">
-                        <input type="text" class="form-control" id="taskName" name="task_name" ,
-                            placeholder="nse_bulk_download">
+                        <input type="text" class="form-control" id="taskName" name="task_name" , placeholder="Task #1">
+                    </div>
+                </div>
+
+                <!-- <div class="row mb-3 align-items-center">
+                    <div class="col-md-3">
+                        <label for="siteName" class="form-label fw-semibold">
+                           <h6 class="text-primary fw-bold">BASE SITE</h6>
+                        </label>
+                    </div>
+
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="siteUrl" name="site_name" ,
+                            placeholder="https://www.amfiindia.com/">
+                    </div>
+                </div> -->
+                <div class="row mb-3 align-items-center">
+                    <div class="col-md-3">
+                        <label for="apiName" class="form-label fw-semibold">
+                            <h6 class="text-primary fw-bold">API URL</h6>
+                        </label>
+                    </div>
+
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="apiUrl" name="api_name" ,
+                            placeholder="https://www.amfiindia.com/api/distributor-agent">
                     </div>
                 </div>
 
@@ -58,66 +82,107 @@
                             <option value="false">False</option>
                         </select>
                     </div>
+
                 </div>
 
-                <div class="mb-4">
+                <div class="row mb-4 align-items-center">
+                    <div class="col-md-3">
+                        <label for="requestType" class="form-label fw-semibold">
+                            RequestType
+                        </label>
+                    </div>
+
+                    <div class="col-md-3">
+                        <select class="form-control" id="requestType" name="requestType">
+                            <option value="true">GET</option>
+                            <option value="false">POST</option>
+                            <option value="true">PUT</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="fileExtension" class="form-label fw-semibold">
+                            ExpectedType
+                        </label>
+                    </div>
+
+                    <div class="col-md-3">
+                        <input type="string" class="form-control" id="fileExtension" , name="fileType" , value=".pdf">
+                    </div>
+                </div>
+
+                <!-- <div class="mb-4">
                     <h6 class="text-primary fw-bold">Request Settings</h6>
                     <hr>
-                </div>
+                </div> -->
 
                 <div class="row mb-4">
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <label for="taskHeaders" class="form-label fw-semibold">
                             Headers
                         </label>
                     </div>
-
-                    <div class="col-md-9">
-                        <textarea class="form-control" id="taskHeaders" name="headers" rows="6">{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-                            "Accept": "*/*",
-                            "Accept-Encoding": "gzip, deflate, br",
-                            "Connection": "keep-alive",
-                            "Referer": "https://example.com/init",
-                            "Accept-Language": "en-US,en;q=0.9"}</textarea>
-                        <small class="text-muted">Optional JSON request headers.</small>
-
-                    </div>
-                </div>
-
-                <div class="mb-4">
-                    <h6 class="text-primary fw-bold">Input Data</h6>
-                    <hr>
-                </div>
-
-                <div class="row align-items-center">
-                    <div class="col-md-3">
-                        <label for="taskFile" class="form-label fw-semibold">
-                            Files CSV
+                    <div class="col-md-6">
+                        <label for="taskHeaders" class="form-label fw-semibold">
+                            Skeleton
                         </label>
                     </div>
+                </div>
 
-                    <div class="col-md-9">
-                        <input class="form-control" type="file" id="taskFile" , name="csv_file" , accept=".csv">
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <textarea class="form-control" id="taskHeaders" name="headers" rows="8">{"Accept": "*/*", "Accept-Encoding": "gzip, deflate, br", "Connection": "keep-alive",  "Referer": "https://example.com/init", "Accept-Language": "en-US,en;q=0.9", "Content-Type": "", "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}</textarea>
+                    </div>
 
-                        <small class="text-muted">
-                            Upload a CSV containing download URLs.
-                        </small>
+                    <div class="col-md-6">
+                        <textarea class="form-control" id="skeleton" name="skeleton" rows="8">{}</textarea>
+                        
                     </div>
                 </div>
 
-            </div>
+                <!-- <div class="mb-4">
+                    <h6 class="text-primary fw-bold">Input Data</h6>
+                    <hr>
+                </div> -->
 
-            <!-- Footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    Cancel
-                </button>
+                <div class="row align-items-center">
+                    <!-- <div class="col-md-2">
+                        <label for="taskFile" class="form-label fw-semibold">
+                            Files
+                        </label>
+                    </div> -->
 
-                <button type="button" class="btn btn-primary" onclick="createBulkTask()">
-                    Create Task
-                </button>
+                <div class="col-md-6">
+                    <input class="form-control" type="file" id="taskFile" , name="csv_file" , accept=".csv">
+
+                    <!-- <small class="text-muted">
+                            Upload a CSV containing download URLs.
+                        </small> -->
+                </div>
+
+                <div class="col-md-2">
+                    <label for="taskFile" class="form-label fw-semibold">
+                        pagination
+                    </label>
+                </div>
+
+                <div class="col-md-4">
+                    <input class="form-control" type="text" id="pagination" , name="pagination" , accept=".csv">
+                </div>
             </div>
 
         </div>
+
+        <!-- Footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                Cancel
+            </button>
+
+            <button type="button" class="btn btn-primary" onclick="createBulkTask()">
+                Create Task
+            </button>
+        </div>
+
     </div>
+</div>
 </div>

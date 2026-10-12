@@ -1,24 +1,21 @@
 function getCookie(name) {
-    let cookieValue = null;
+  let cookieValue = null;
 
-    if (document.cookie && document.cookie !== "") {
-        const cookies = document.cookie.split(";");
+  if (document.cookie && document.cookie !== "") {
+    const cookies = document.cookie.split(";");
 
-        for (let cookie of cookies) {
-            cookie = cookie.trim();
+    for (let cookie of cookies) {
+      cookie = cookie.trim();
 
-            if (cookie.startsWith(name + "=")) {
-                cookieValue = decodeURIComponent(
-                    cookie.substring(name.length + 1)
-                );
-                break;
-            }
-        }
+      if (cookie.startsWith(name + "=")) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
     }
+  }
 
-    return cookieValue;
+  return cookieValue;
 }
-
 
 async function createBulkTask() {
   try {
@@ -30,9 +27,9 @@ async function createBulkTask() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-CSRFToken": csrfToken
+        "X-CSRFToken": csrfToken,
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
 
     const result = await response.json();
@@ -54,7 +51,6 @@ async function createBulkTask() {
     if (result.id) {
       renderBulkTask(result.id);
     }
-
   } catch (error) {
     alert(error.message);
   }
@@ -64,9 +60,17 @@ async function getBulkFormJSON() {
   const taskName = document.getElementById("taskName").value.trim();
   const throttle = Number(document.getElementById("taskThrottle").value) || 0;
   const headersText = document.getElementById("taskHeaders").value.trim();
+  const expectedData = document.getElementById("skeleton").value.trim();
   const file = document.getElementById("taskFile").files[0];
   const verify = document.getElementById("taskVerify").value.trim() === "true";
+  const requestType = document.getElementById("requestType").value.trim();
+  const pagination = document.getElementById("pagination").value.trim();
+  const expectedFileType = document
+    .getElementById("fileExtension")
+    .value.trim();
 
+  const siteUrl = document.getElementById("siteUrl").value.trim();
+  const apiUrl = document.getElementById("apiUrl").value.trim();
 
   // Parse headers
   let headers = {};
@@ -78,10 +82,34 @@ async function getBulkFormJSON() {
       throw new Error("Headers must contain valid JSON.");
     }
   }
+  if (expectedData) {
+    try {
+      headers = JSON.parse(expectedData);
+    } catch (error) {
+      throw new Error("Skeleton must contain valid JSON.");
+    }
+  }
+
+  const validRequestTypes = ["GET", "POST", "PUT"];
+  const validFileTypes = [".csv", ".json", ".pdf", ".txt", ".xlsx"];
+
+  if (!validRequestTypes.includes(requestType.toUpperCase())) {
+    alert("Select Request Type");
+    return;
+  }
+
+  if (!validFileTypes.includes(expectedFileType.toLowerCase())) {
+    alert("Select valid File Type (.csv, .json, .pdf, .txt, .xlsx).");
+    return;
+  }
 
   // CSV is required
   if (!file) {
     throw new Error("Please select a CSV file.");
+  }
+
+  if (!siteUrl) {
+    throw new Error("Enter Landing site !!");
   }
 
   // Read CSV
@@ -111,19 +139,23 @@ async function getBulkFormJSON() {
   // Final JSON
   return {
     task_name: taskName,
-    verify_request:verify,
+    request_type: requestType,
+    file_type: expectedFileType,
+    verify_request: verify,
     throttle: throttle,
     headers: headers,
+    site_url: siteUrl,
+    api_url: apiUrl,
     csv_file: files,
+    expected_json: expectedData,
+    pagination: pagination,
   };
 }
 
-
-
-window.renderBulkTask = function(taskId) {
+window.renderBulkTask = function (taskId) {
   const bar = document.getElementById("progressBar");
   if (bar) {
-    bar.style.width = "0%";   // reset to empty
+    bar.style.width = "0%"; // reset to empty
     bar.setAttribute("aria-valuenow", 0);
   }
 
@@ -131,8 +163,6 @@ window.renderBulkTask = function(taskId) {
   console.log("Navigating to:", url);
   window.location.href = url;
 };
-
-
 
 async function refreshTask(taskId) {
   const btn = document.querySelector("#refreshBtn");
@@ -157,16 +187,14 @@ async function refreshTask(taskId) {
     // Update logs
     const logViewer = document.querySelector("#logViewer .bg-dark");
     logViewer.innerHTML = "";
-    data.logs.forEach(line => {
+    data.logs.forEach((line) => {
       const div = document.createElement("div");
       div.textContent = line;
       logViewer.appendChild(div);
     });
-
   } catch (err) {
     alert("Error refreshing task: " + err.message);
   } finally {
-    
     if (btn) {
       btn.disabled = false;
       btn.textContent = "Refresh";
@@ -174,8 +202,7 @@ async function refreshTask(taskId) {
   }
 }
 
-
 // Delete task and reload page
-
-
-
+// init JSONEditor
+const container = document.getElementById("jsonEditor");
+const editor = new JSONEditor(container, { mode: "tree" });

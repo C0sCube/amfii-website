@@ -106,7 +106,12 @@ def bulk_create(request):
             total_files=len(data.get("csv_file", [])),
             headers=data.get("headers", {}),
             throttle=data.get("throttle", 0),
-            task_dir=f"{task_id}"
+            verify_request = data.get("verify_request"),
+            request_type = data.get("request_type","GET"),
+            file_type = data.get("file_type",""),
+            task_dir=f"{task_id}",
+            site_url = data.get("site_url","") or data.get("headers", {}).get("Referer",""),
+            api_url = data.get("api_url",""),
         )
 
         
@@ -128,7 +133,7 @@ def bulk_create(request):
             log.write(f"[{timezone.now()}] Task created with {task.total_files} files\n")
             
          #celery   
-        run_download_task.delay(task.id, out_dir)
+        # run_download_task.delay(task.id, out_dir)
         
         from .worker import DownloadWorker
         

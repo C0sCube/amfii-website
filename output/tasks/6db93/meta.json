@@ -1,0 +1,104 @@
+{
+  "task_name": "ok_1",
+  "verify_request": true,
+  "throttle": 1,
+  "headers": {
+    "Accept": "*/*",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Connection": "keep-alive",
+    "Referer": " https://www.amfiindia.com",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Content-Type": "",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+  },
+  "csv_file": [
+    {
+      "file_name": "100047",
+      "arn": "100047"
+    },
+    {
+      "file_name": "100048",
+      "arn": "100048"
+    },
+    {
+      "file_name": "100083",
+      "arn": "100083"
+    },
+    {
+      "file_name": "100151",
+      "arn": "100151"
+    },
+    {
+      "file_name": "100183",
+      "arn": "100183"
+    },
+    {
+      "file_name": "10019",
+      "arn": "10019"
+    },
+    {
+      "file_name": "100202",
+      "arn": "100202"
+    },
+    {
+      "file_name": "100203",
+      "arn": "100203"
+    },
+    {
+      "file_name": "100208",
+      "arn": "100208"
+    },
+    {
+      "file_name": "100254",
+      "arn": "100254"
+    },
+    {
+      "file_name": "100256",
+      "arn": "100256"
+    },
+    {
+      "file_name": "100257",
+      "arn": "100257"
+    },
+    {
+      "file_name": "100297",
+      "arn": "100297"
+    },
+    {
+      "file_name": "100298",
+      "arn": "100298"
+    },
+    {
+      "file_name": "100299",
+      "arn": "100299"
+    },
+    {
+      "file_name": "100300",
+      "arn": "100300"
+    },
+    {
+      "file_name": "100318",
+      "arn": "100318"
+    },
+    {
+      "file_name": "100329",
+      "arn": "100329"
+    },
+    {
+      "file_name": "100343",
+      "arn": "100343"
+    },
+    {
+      "file_name": "100348",
+      "arn": "100348"
+    },
+    {
+      "file_name": "100349",
+      "arn": "100349"
+    },
+    {
+      "file_name": "100386",
+      "arn": "100386"
+    }
+  ]
+}

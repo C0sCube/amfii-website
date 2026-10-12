@@ -26,9 +26,18 @@ class DownloadTask(models.Model):
     failed_files = models.IntegerField(default=0)
 
     # Configuration
+    api_url = models.CharField(max_length=300, default="")
+    site_url = models.CharField(max_length=300,default="") 
     headers = models.JSONField(default=dict)
+    paginationStirng = models.CharField(max_length=100, default="")
+    expectedData = models.JSONField(default=dict)
     throttle = models.IntegerField(default=0)
     verify_request = models.BooleanField(default=False)
-
-    # Filesystem
+    request_type = models.CharField(max_length=10, default="GET")
+    file_type = models.CharField(
+        max_length=20,
+        default="",
+        blank=True
+    )
+        # Filesystem
     task_dir = models.CharField(max_length=500)

@@ -1,0 +1,5 @@
+[2026-10-09 06:58:10.122258+00:00] Task created with 22 files
+2026-10-09 12:28:10,138 [INFO] Worker initialized.
+2026-10-09 12:28:10,498 [INFO] Cookies initialized from https://www.amfiindia.com
+2026-10-09 12:28:10,498 [INFO] Starting worker
+2026-10-09 12:28:10,510 [INFO] Running test batch with 5 records

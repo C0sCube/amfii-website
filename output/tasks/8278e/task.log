@@ -1,0 +1,5 @@
+[2026-10-09 06:56:25.911454+00:00] Task created with 22 files
+2026-10-09 12:26:25,911 [INFO] Worker initialized.
+2026-10-09 12:26:25,911 [ERROR] Cookie initialization failed : Invalid leading whitespace, reserved character(s), or return character(s) in header value: ' https://www.amfiindia.com'
+2026-10-09 12:26:25,911 [INFO] Starting worker
+2026-10-09 12:26:25,928 [INFO] Running test batch with 5 records
